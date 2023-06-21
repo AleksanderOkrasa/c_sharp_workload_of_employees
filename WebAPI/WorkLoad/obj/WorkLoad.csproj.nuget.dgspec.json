@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pan Paweł\\source\\repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj": {}
+    "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pan Paweł\\source\\repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj": {
+    "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pan Paweł\\source\\repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj",
+        "projectUniqueName": "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj",
         "projectName": "WorkLoad",
-        "projectPath": "C:\\Users\\Pan Paweł\\source\\repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj",
-        "packagesPath": "C:\\Users\\Pan Paweł\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pan Paweł\\source\\repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\obj\\",
+        "projectPath": "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj",
+        "packagesPath": "C:\\Users\\pkownacki\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Pan Paweł\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pkownacki\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,36 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Data.Sqlite.Core": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite.Core": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.7, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
