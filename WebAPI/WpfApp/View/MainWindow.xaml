@@ -10,6 +10,26 @@
         <viewmodel:WorkloadViewModel/>
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBox Width="200" Text="{Binding NewTaskDescription}" />
+            <Button Content="Add Task" Command="{Binding AddTaskCommand}" />
+        </StackPanel>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Tasks}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Task Description" DisplayMemberBinding="{Binding TaskDescription}" />
+                    <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding EmployeeId}" />
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" />
+                    <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

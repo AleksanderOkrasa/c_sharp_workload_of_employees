@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj": {}
+    "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj": {
+    "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj",
+        "projectUniqueName": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj",
         "projectName": "WorkLoad",
-        "projectPath": "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj",
+        "projectPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj",
         "packagesPath": "C:\\Users\\oleko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\obj\\",
+        "outputPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
