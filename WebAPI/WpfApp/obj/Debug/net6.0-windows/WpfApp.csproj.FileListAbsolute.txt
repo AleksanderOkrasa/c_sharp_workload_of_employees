@@ -20,3 +20,5 @@ C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\
 C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\obj\Debug\net6.0-windows\WpfApp.genruntimeconfig.cache
 C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\obj\Debug\net6.0-windows\ref\WpfApp.dll
 C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\obj\Debug\net6.0-windows\View\EmployeeManagerWindow.g.cs
+C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\obj\Debug\net6.0-windows\View\EmployeeManagerWindow.baml

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp.View;
+using WpfApp.ViewModel;
 
 namespace WpfApp
 {
@@ -24,5 +26,14 @@ namespace WpfApp
         {
             InitializeComponent();
         }
+
+        private void OpenEmployeeManagerWindow(object sender, RoutedEventArgs e)
+        {
+            EmployeeManagerViewModel employeeManagerViewModel = new EmployeeManagerViewModel();
+            EmployeeManagerWindow employeeManagerWindow = new EmployeeManagerWindow();
+            employeeManagerWindow.DataContext = employeeManagerViewModel;
+            employeeManagerWindow.Show(); ;
+        }
     }
+
 }

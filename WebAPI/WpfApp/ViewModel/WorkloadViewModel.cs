@@ -5,38 +5,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WpfApp.Basic;
 using WpfApp.Model;
+using WpfApp.View;
 
 namespace WpfApp.ViewModel
 {
     internal partial class WorkloadViewModel : ViewModelBase
+
     {
-        public ObservableCollection<TaskModel> Tasks { get; set; } // Przechowywanie zadań
-        public List<KeyValuePair<int, string>> PriorityList { get; }
-        public Command AddTaskCommand { get; private set; }
-
-
-
-
         private string newTaskDescription;
-
-        public string NewTaskDescription
-        {
-            get => newTaskDescription;
-            set => Set(ref newTaskDescription, value);
-        }
-
         private KeyValuePair<int, string> _selectedPriority;
-        public KeyValuePair<int, string> SelectedPriority
-        {
-            get => _selectedPriority; 
-            set => Set(ref _selectedPriority, value);
-        }
-
-        private string numericValue;
-        public string NumericValue { get => numericValue; set => Set(ref numericValue, value); }
+        private double numericTimeValue = 1;
 
 
         public WorkloadViewModel()
@@ -53,7 +35,19 @@ namespace WpfApp.ViewModel
             new KeyValuePair<int, string>(4, "Bardzo wysoki"),
             new KeyValuePair<int, string>(5, "Krytyczny")
         };
+          
         }
+        public ObservableCollection<TaskModel> Tasks { get; set; } // Przechowywanie zadań
+        public List<KeyValuePair<int, string>> PriorityList { get; }
+        public Command AddTaskCommand { get; private set; }
+
+
+        public string NewTaskDescription { get => newTaskDescription; set => Set(ref newTaskDescription, value);}
+
+        public KeyValuePair<int, string> SelectedPriority { get => _selectedPriority; set => Set(ref _selectedPriority, value);}
+
+        public double NumericTimeValue { get => numericTimeValue; set => Set(ref numericTimeValue, value); }
+
 
         private void AddTask()
         {
@@ -62,10 +56,13 @@ namespace WpfApp.ViewModel
                 ID = GenerateNewTaskID(),
                 TaskDescription = NewTaskDescription,
                 Priority = SelectedPriority.Key,
+                Time = NumericTimeValue
             };
 
             Tasks.Add(newTask);
             NewTaskDescription = string.Empty;
+            NumericTimeValue = 1;
+
         }
 
         private int GenerateNewTaskID()
@@ -76,6 +73,5 @@ namespace WpfApp.ViewModel
                 return 1;
         }
 
- 
     }
 }
