@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ using System.Windows.Input;
 using WpfApp.Basic;
 using WpfApp.Model;
 using WpfApp.View;
- 
+
 namespace WpfApp.ViewModel
 {
     public partial class WorkloadViewModel : ViewModelBase
@@ -20,12 +22,14 @@ namespace WpfApp.ViewModel
         private KeyValuePair<int, string> _selectedPriority;
         private double numericTimeValue = 1;
         private int selectedEmployeeID;
-       
+
         public WorkloadViewModel()
         {
             Tasks = new ObservableCollection<TaskModel>();
 
             AddTaskCommand = new Command(AddTask);
+
+            LetAnHourPassCommand = new Command(LetAnHourPass);
 
             PriorityList = new List<KeyValuePair<int, string>>
         {
@@ -35,6 +39,8 @@ namespace WpfApp.ViewModel
             new KeyValuePair<int, string>(4, "Bardzo wysoki"),
             new KeyValuePair<int, string>(5, "Krytyczny")
         };
+            SelectedPriority = PriorityList.FirstOrDefault();
+
             Employees = new ObservableCollection<EmployeeModel>();
 
         }
@@ -43,11 +49,12 @@ namespace WpfApp.ViewModel
         public ObservableCollection<TaskModel> Tasks { get; set; } // Przechowywanie zadań
         public List<KeyValuePair<int, string>> PriorityList { get; }
         public Command AddTaskCommand { get; private set; }
+        public Command LetAnHourPassCommand { get; private set; }
 
 
-        public string NewTaskDescription { get => newTaskDescription; set => Set(ref newTaskDescription, value);}
+        public string NewTaskDescription { get => newTaskDescription; set => Set(ref newTaskDescription, value); }
 
-        public KeyValuePair<int, string> SelectedPriority { get => _selectedPriority; set => Set(ref _selectedPriority, value);}
+        public KeyValuePair<int, string> SelectedPriority { get => _selectedPriority; set => Set(ref _selectedPriority, value); }
 
         public double NumericTimeValue { get => numericTimeValue; set => Set(ref numericTimeValue, value); }
 
@@ -66,8 +73,10 @@ namespace WpfApp.ViewModel
             };
 
             Tasks.Add(newTask);
+
             NewTaskDescription = string.Empty;
             NumericTimeValue = 1;
+            SelectedPriority = PriorityList.FirstOrDefault();
 
         }
 
@@ -79,5 +88,56 @@ namespace WpfApp.ViewModel
                 return 1;
         }
 
+        private void LetAnHourPass()
+        {
+            List<int> ListTaskIdToTimeChange = new List<int>();
+
+            foreach (var employee in Employees)
+            {
+                int employeeID = employee.ID;
+                var taskID = LookForTaskWithTheHighestPriorityForEmployee(employeeID);
+                if (taskID != 0)
+                {
+                    ListTaskIdToTimeChange.Add(taskID);
+                }
+            }
+            DecreaseResidualTime(ListTaskIdToTimeChange, 1);
+
+        }
+
+        private int LookForTaskWithTheHighestPriorityForEmployee(int employeeID)
+        {
+            for (var i = 5; i >= 1; i--)
+            {
+                var taskID = SearchPriorityInTaskForEmployee(employeeID, i);
+                if (taskID != 0) { return taskID; }
+            }
+            return 0;
+        }
+
+        private int SearchPriorityInTaskForEmployee(int employeeID, int priority)
+        {
+            foreach (var task in Tasks)
+            {
+                if (task.EmployeeId == employeeID && task.Priority == priority)
+                {
+                    return task.ID;
+                }
+            }
+            return 0;
+        }
+
+
+        private void DecreaseResidualTime(List<int> ListTaskID, double time)
+        {
+            foreach (var taskID in ListTaskID)
+            {
+                var taskToUpdate = Tasks.FirstOrDefault(task => task.ID == taskID);
+                if (taskToUpdate != null)
+                {
+                    taskToUpdate.Time -= time;
+                }
+            }
+        }
     }
 }
