@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj": {}
+    "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj": {
+    "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj",
+        "projectUniqueName": "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj",
         "projectName": "WorkLoad",
-        "projectPath": "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\WorkLoad.csproj",
-        "packagesPath": "C:\\Users\\pkownacki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pkownacki\\Source\\Repos\\c_sharp_workload_of_employees\\WebAPI\\WorkLoad\\obj\\",
+        "projectPath": "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\WorkLoad.csproj",
+        "packagesPath": "C:\\Users\\oleko\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oleko\\Source\\Repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoad\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\pkownacki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\oleko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
