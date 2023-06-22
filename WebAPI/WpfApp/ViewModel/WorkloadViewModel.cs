@@ -35,6 +35,9 @@ namespace WpfApp.ViewModel
             set => Set(ref _selectedPriority, value);
         }
 
+        private string numericValue;
+        public string NumericValue { get => numericValue; set => Set(ref numericValue, value); }
+
 
         public WorkloadViewModel()
         {
@@ -72,5 +75,7 @@ namespace WpfApp.ViewModel
             else
                 return 1;
         }
+
+ 
     }
 }
