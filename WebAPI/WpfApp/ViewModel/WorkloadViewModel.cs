@@ -14,28 +14,42 @@ namespace WpfApp.ViewModel
     internal partial class WorkloadViewModel : ViewModelBase
     {
         public ObservableCollection<TaskModel> Tasks { get; set; } // Przechowywanie zadań
+        public List<KeyValuePair<int, string>> PriorityList { get; }
+        public Command AddTaskCommand { get; private set; }
+
+
+
 
         private string newTaskDescription;
+
         public string NewTaskDescription
         {
-            get { return newTaskDescription; }
-            set
-            {
-                if (newTaskDescription != value)
-                {
-                    newTaskDescription = value;
-                    OnPropertyChanged("NewTaskDescription");
-                }
-            }
+            get => newTaskDescription;
+            set => Set(ref newTaskDescription, value);
         }
 
-        public Command AddTaskCommand { get; private set; }
+        private KeyValuePair<int, string> _selectedPriority;
+        public KeyValuePair<int, string> SelectedPriority
+        {
+            get => _selectedPriority; 
+            set => Set(ref _selectedPriority, value);
+        }
+
 
         public WorkloadViewModel()
         {
             Tasks = new ObservableCollection<TaskModel>();
 
             AddTaskCommand = new Command(AddTask);
+
+            PriorityList = new List<KeyValuePair<int, string>>
+        {
+            new KeyValuePair<int, string>(1, "Niski"),
+            new KeyValuePair<int, string>(2, "Średni"),
+            new KeyValuePair<int, string>(3, "Wysoki"),
+            new KeyValuePair<int, string>(4, "Bardzo wysoki"),
+            new KeyValuePair<int, string>(5, "Krytyczny")
+        };
         }
 
         private void AddTask()
@@ -44,6 +58,7 @@ namespace WpfApp.ViewModel
             {
                 ID = GenerateNewTaskID(),
                 TaskDescription = NewTaskDescription,
+                Priority = SelectedPriority.Key,
             };
 
             Tasks.Add(newTask);

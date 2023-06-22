@@ -9,7 +9,7 @@ namespace WpfApp.Model
     internal class TaskModel
     {
         public int ID { get; set; }
-        public string? TaskDescription { get; set; }
+        public string TaskDescription { get; set; }
         public int EmployeeId { get; set; }
         public double Time { get; set; }
         public int Priority { get; set; }
