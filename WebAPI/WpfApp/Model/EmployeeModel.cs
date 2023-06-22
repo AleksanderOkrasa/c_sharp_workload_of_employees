@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace WpfApp.Model
 {
-    internal class EmployeeModel
+    public class EmployeeModel
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

@@ -9,17 +9,24 @@ using WpfApp.Model;
 
 namespace WpfApp.ViewModel
 {
-    internal partial class EmployeeManagerViewModel : ViewModelBase
+    public partial class EmployeeManagerViewModel : ViewModelBase
     {
         private string? firstName;
         private string? lastName;
+        private WorkloadViewModel workloadViewModel;
 
-        public EmployeeManagerViewModel()
+      //  public EmployeeManagerViewModel()
+     //   {
+    //        AddEmployeeCommand = new Command(AddEmployee);
+    //        workload = new WorkloadViewModel();
+     //       Employees = workload.Employees;
+        //}
+        public EmployeeManagerViewModel(WorkloadViewModel workloadViewModel)
         {
+            this.workloadViewModel = workloadViewModel;
             AddEmployeeCommand = new Command(AddEmployee);
-            Employees = new ObservableCollection<EmployeeModel>();
+            Employees = workloadViewModel.Employees;
         }
-
         public Command AddEmployeeCommand { get; private set; }
 
         public ObservableCollection<EmployeeModel> Employees { get; set; }
@@ -39,6 +46,7 @@ namespace WpfApp.ViewModel
             };
 
             Employees.Add(newEmployee);
+            //workloadViewModel.Employees.Add(newEmployee);
             FirstName = string.Empty;
             LastName = string.Empty;
 

@@ -10,17 +10,17 @@ using System.Windows.Input;
 using WpfApp.Basic;
 using WpfApp.Model;
 using WpfApp.View;
-
+ 
 namespace WpfApp.ViewModel
 {
-    internal partial class WorkloadViewModel : ViewModelBase
+    public partial class WorkloadViewModel : ViewModelBase
 
     {
         private string newTaskDescription;
         private KeyValuePair<int, string> _selectedPriority;
         private double numericTimeValue = 1;
-
-
+        private int selectedEmployeeID;
+       
         public WorkloadViewModel()
         {
             Tasks = new ObservableCollection<TaskModel>();
@@ -35,8 +35,11 @@ namespace WpfApp.ViewModel
             new KeyValuePair<int, string>(4, "Bardzo wysoki"),
             new KeyValuePair<int, string>(5, "Krytyczny")
         };
-          
+            Employees = new ObservableCollection<EmployeeModel>();
+
         }
+
+        public ObservableCollection<EmployeeModel> Employees { get; set; }
         public ObservableCollection<TaskModel> Tasks { get; set; } // Przechowywanie zadań
         public List<KeyValuePair<int, string>> PriorityList { get; }
         public Command AddTaskCommand { get; private set; }
@@ -48,6 +51,8 @@ namespace WpfApp.ViewModel
 
         public double NumericTimeValue { get => numericTimeValue; set => Set(ref numericTimeValue, value); }
 
+        public int SelectedEmployeeID { get => selectedEmployeeID; set => Set(ref selectedEmployeeID, value); }
+
 
         private void AddTask()
         {
@@ -56,7 +61,8 @@ namespace WpfApp.ViewModel
                 ID = GenerateNewTaskID(),
                 TaskDescription = NewTaskDescription,
                 Priority = SelectedPriority.Key,
-                Time = NumericTimeValue
+                Time = NumericTimeValue,
+                EmployeeId = SelectedEmployeeID,
             };
 
             Tasks.Add(newTask);

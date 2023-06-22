@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp.Model
 {
-    internal class TaskModel
+    public class TaskModel
     {
         public int ID { get; set; }
         public string TaskDescription { get; set; }

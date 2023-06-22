@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp.ViewModel;
 
 namespace WpfApp.View
 {
@@ -19,9 +20,13 @@ namespace WpfApp.View
     /// </summary>
     public partial class EmployeeManagerWindow : Window
     {
-        public EmployeeManagerWindow()
+        private EmployeeManagerViewModel employeeManagerViewModel;
+
+        public EmployeeManagerWindow(EmployeeManagerViewModel viewModel)
         {
             InitializeComponent();
+            employeeManagerViewModel = viewModel;
+            DataContext = employeeManagerViewModel;
         }
     }
 }

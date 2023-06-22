@@ -22,17 +22,22 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private WorkloadViewModel workloadViewModel;
+        private EmployeeManagerViewModel employeeManagerViewModel;
+        private EmployeeManagerWindow employeeManagerWindow;
+
         public MainWindow()
         {
             InitializeComponent();
+            workloadViewModel = new WorkloadViewModel();
+            employeeManagerViewModel = new EmployeeManagerViewModel(workloadViewModel);
+            DataContext = workloadViewModel;
         }
 
         private void OpenEmployeeManagerWindow(object sender, RoutedEventArgs e)
         {
-            EmployeeManagerViewModel employeeManagerViewModel = new EmployeeManagerViewModel();
-            EmployeeManagerWindow employeeManagerWindow = new EmployeeManagerWindow();
-            employeeManagerWindow.DataContext = employeeManagerViewModel;
-            employeeManagerWindow.Show(); ;
+            employeeManagerWindow = new EmployeeManagerWindow(employeeManagerViewModel);
+            employeeManagerWindow.Show();
         }
     }
 
