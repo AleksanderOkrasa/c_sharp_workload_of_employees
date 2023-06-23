@@ -7,3 +7,4 @@
 *.csproj
 /WebAPI/WorkLoad
 /.gitignore
+/WebAPI/WpfApp/obj/Debug/net6.0-windows
