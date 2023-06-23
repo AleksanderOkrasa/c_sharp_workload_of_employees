@@ -78,6 +78,7 @@
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Content="Open Employee Manager Window" Click="OpenEmployeeManagerWindow"/>
             <Button Grid.Row="1" Content="Let An Hour Pass" Command="{Binding LetAnHourPassCommand}"/>
+            <ToggleButton Grid.Row="2" Content="Automatic Time Lapse" IsChecked="{Binding AutomaticTimeLapseIsChecked}" Command="{Binding AutomaticTimeLapseCommand}"/>
         </Grid>
     </Grid>
 </Window>

@@ -22,6 +22,7 @@ namespace WpfApp.ViewModel
         private KeyValuePair<int, string> _selectedPriority;
         private double numericTimeValue = 1;
         private int selectedEmployeeID;
+        private bool automaticTimeLapseIsChecked;
 
         public WorkloadViewModel()
         {
@@ -30,6 +31,8 @@ namespace WpfApp.ViewModel
             AddTaskCommand = new Command(AddTask);
 
             LetAnHourPassCommand = new Command(LetAnHourPass);
+
+            AutomaticTimeLapseCommand = new Command(AutomaticTimeLapse);
 
             PriorityList = new List<KeyValuePair<int, string>>
         {
@@ -43,6 +46,8 @@ namespace WpfApp.ViewModel
 
             Employees = new ObservableCollection<EmployeeModel>();
 
+           
+
         }
 
         public ObservableCollection<EmployeeModel> Employees { get; set; }
@@ -50,6 +55,7 @@ namespace WpfApp.ViewModel
         public List<KeyValuePair<int, string>> PriorityList { get; }
         public Command AddTaskCommand { get; private set; }
         public Command LetAnHourPassCommand { get; private set; }
+        public Command AutomaticTimeLapseCommand { get; private set; }
 
 
         public string NewTaskDescription { get => newTaskDescription; set => Set(ref newTaskDescription, value); }
@@ -59,6 +65,8 @@ namespace WpfApp.ViewModel
         public double NumericTimeValue { get => numericTimeValue; set => Set(ref numericTimeValue, value); }
 
         public int SelectedEmployeeID { get => selectedEmployeeID; set => Set(ref selectedEmployeeID, value); }
+
+        public bool AutomaticTimeLapseIsChecked { get => automaticTimeLapseIsChecked; set => Set(ref automaticTimeLapseIsChecked, value); }
 
 
         private void AddTask()
@@ -88,7 +96,19 @@ namespace WpfApp.ViewModel
                 return 1;
         }
 
-        private void LetAnHourPass()
+
+        private async void AutomaticTimeLapse()
+        {
+            while (AutomaticTimeLapseIsChecked)
+            {
+                LetAnTimePass(0.02);
+                await Task.Delay(100);
+            }
+
+        }
+
+
+        private void LetAnTimePass(double timeToReduce)
         {
             List<int> ListTaskIdToTimeChange = new List<int>();
 
@@ -101,8 +121,13 @@ namespace WpfApp.ViewModel
                     ListTaskIdToTimeChange.Add(taskID);
                 }
             }
-            DecreaseResidualTime(ListTaskIdToTimeChange, 1);
+            DecreaseResidualTime(ListTaskIdToTimeChange, timeToReduce);
 
+        }
+
+        private void LetAnHourPass()
+        {
+            LetAnTimePass(1);
         }
 
         private int LookForTaskWithTheHighestPriorityForEmployee(int employeeID)
