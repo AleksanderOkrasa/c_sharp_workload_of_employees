@@ -119,7 +119,7 @@ namespace WpfApp.ViewModel
         {
             foreach (var task in Tasks)
             {
-                if (task.EmployeeId == employeeID && task.Priority == priority)
+                if (task.EmployeeId == employeeID && task.Priority == priority && task.Time > 0)
                 {
                     return task.ID;
                 }
@@ -135,8 +135,22 @@ namespace WpfApp.ViewModel
                 var taskToUpdate = Tasks.FirstOrDefault(task => task.ID == taskID);
                 if (taskToUpdate != null)
                 {
+                    if (taskToUpdate.Time > timeToReduce)
+                    {
+                        taskToUpdate.Time -= timeToReduce;
+                    }
+                    else
+                    {
+                        timeToReduce -= taskToUpdate.Time;
+                        taskToUpdate.Time = 0;
 
-                    taskToUpdate.Time -= timeToReduce;
+                        var employeeID = taskToUpdate.EmployeeId;
+                        var newTaskID = LookForTaskWithTheHighestPriorityForEmployee(employeeID);
+                        if (newTaskID != 0)
+                        {
+                            ListTaskID.Append(newTaskID); // Tutaj znalazłem różnicę między Add a Append, na Add wyskakuje błąd :)  
+                        }
+                    }
                     OnPropertyChanged(nameof(Tasks));
                 }
             }
