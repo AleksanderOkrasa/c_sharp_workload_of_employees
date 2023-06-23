@@ -1,15 +1,25 @@
 using Microsoft.EntityFrameworkCore;
 using WorkLoad;
+using WorkLoad.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connStr = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<DbInter>(option => option.UseSqlite(connStr));   
 // Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+//Register db
+var connStr = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlite(connStr));
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.MapGet("/api/employees", async (DbInter db) => await db.Employees.ToListAsync());
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();
 
