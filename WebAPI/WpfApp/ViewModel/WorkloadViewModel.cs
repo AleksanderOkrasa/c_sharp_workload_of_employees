@@ -26,6 +26,8 @@ namespace WpfApp.ViewModel
         private int selectedEmployeeID;
         private bool automaticTimeLapseIsChecked;
         private ICollectionView _tasksView;
+        private int filterEmployeeID;
+
 
         public WorkloadViewModel()
         {
@@ -53,7 +55,8 @@ namespace WpfApp.ViewModel
             SortByTimeCommand = new Command(SortByTime);
             SortByEmployeeCommand = new Command(SortByEmployee);
             SortByPriorityCommand = new Command(SortByPriority);
-            ClearSortingCommand = new Command(ClearSorting);
+            ClearSortingAndFiltersCommand = new Command(ClearSortingAndFilters);
+            FilterByEmployeeCommand = new Command(FilterByEmployee);
 
         }
 
@@ -66,7 +69,8 @@ namespace WpfApp.ViewModel
         public Command SortByTimeCommand { get; private set; }
         public Command SortByEmployeeCommand { get; private set; }
         public Command SortByPriorityCommand { get; private set; }
-        public Command ClearSortingCommand { get; private set; }  
+        public Command ClearSortingAndFiltersCommand { get; private set; }
+        public Command FilterByEmployeeCommand { get; private set; }   
 
 
 
@@ -79,6 +83,8 @@ namespace WpfApp.ViewModel
         public int SelectedEmployeeID { get => selectedEmployeeID; set => Set(ref selectedEmployeeID, value); }
 
         public bool AutomaticTimeLapseIsChecked { get => automaticTimeLapseIsChecked; set => Set(ref automaticTimeLapseIsChecked, value); }
+        public int FilterEmployeeID { get => filterEmployeeID; set => Set(ref filterEmployeeID, value); }
+
 
 
         private void AddTask()
@@ -210,11 +216,24 @@ namespace WpfApp.ViewModel
             _tasksView.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
             _tasksView.Refresh();
         }
-        private void ClearSorting()
+        private void ClearSortingAndFilters()
         {
             _tasksView.SortDescriptions.Clear();
+            _tasksView.Filter = null;
             _tasksView.Refresh();
         }
 
+        private void FilterByEmployee()
+        {
+            _tasksView.Filter = task =>
+            {
+                if (task is TaskModel taskModel)
+                {
+                    return taskModel.EmployeeId == FilterEmployeeID;
+                }
+                return false;
+            };
+            _tasksView.Refresh();
+        }
     }
 }
