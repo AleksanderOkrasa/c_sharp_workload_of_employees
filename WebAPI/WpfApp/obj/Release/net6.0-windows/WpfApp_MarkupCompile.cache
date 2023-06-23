@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\oleko\Source\Repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\obj\Release\net6.0-windows\
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WpfApp\obj\Release\net6.0-windows\
 WpfApp
 none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
-C:\Users\oleko\Source\Repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WpfApp\App.xaml
-1-487866684
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WpfApp\App.xaml
+2-2117810677
 
-8-1406119935
+11-1435653450
 1941675070116
-View\MainWindow.xaml;
+View\EmployeeManagerWindow.xaml;View\MainWindow.xaml;
 
 True
 
