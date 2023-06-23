@@ -1,10 +1,71 @@
-﻿################################################################################
-# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
-################################################################################
+﻿# Ignorowanie plików i katalogów wygenerowanych przez Visual Studio
 
-/.vs
-.vs
+## Pliki projektów
+*.sln
 *.csproj
-/WebAPI/WorkLoad
-/.gitignore
-/WebAPI/WpfApp/obj/Debug/net6.0-windows
+*.vbproj
+*.vcxproj
+*.vcproj
+*.dbproj
+*.fsproj
+*.pyproj
+*.shproj
+
+## Katalogi wygenerowane przez Visual Studio
+bin/
+obj/
+TestResults/
+.vs/
+
+# Ignorowanie plików i katalogów wygenerowanych przez system kompilacji
+
+## Katalogi wygenerowane przez różne narzędzia do kompilacji
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Ignorowanie plików konfiguracyjnych
+
+*.userprefs
+*.suo
+*.cache
+*.log
+*.vspscc
+*.vssscc
+*.ncb
+*.pyc
+*.pyo
+*.resharper
+*.resharper.user
+*.sln.docstates
+*.bak
+
+# Ignorowanie plików tymczasowych i plików wymienialnych
+
+[Tt]emp/
+[Vv]spscc.sql
+*.~*
+
+# Ignorowanie plików dokumentacji i raportów
+
+Doc/
+doc/
+[Rr]eports/
+
+# Ignorowanie plików zawierających poufne dane, takie jak hasła lub klucze
+
+*.pem
+*.pfx
+*.key
+*.cer
+*.p12
+
+# Ignorowanie plików konfiguracyjnych środowiska
+
+.env
+.env.*
+.vscode/
