@@ -1,6 +1,6 @@
 ﻿namespace WorkLoad
 {
-    public class Employee
+    public class EmployeeS
     {
         public int Id { get; set; }
         public string firstName { get; set; }
