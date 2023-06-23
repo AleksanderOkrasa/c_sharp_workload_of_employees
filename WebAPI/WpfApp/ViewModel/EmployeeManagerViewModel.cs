@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WpfApp.Basic;
 using WpfApp.Model;
 
+
 namespace WpfApp.ViewModel
 {
     public partial class EmployeeManagerViewModel : ViewModelBase

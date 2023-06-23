@@ -5,9 +5,11 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using WpfApp.Basic;
 using WpfApp.Model;
@@ -23,6 +25,7 @@ namespace WpfApp.ViewModel
         private double numericTimeValue = 1;
         private int selectedEmployeeID;
         private bool automaticTimeLapseIsChecked;
+        private ICollectionView _tasksView;
 
         public WorkloadViewModel()
         {
@@ -35,27 +38,36 @@ namespace WpfApp.ViewModel
             AutomaticTimeLapseCommand = new Command(AutomaticTimeLapse);
 
             PriorityList = new List<KeyValuePair<int, string>>
-        {
-            new KeyValuePair<int, string>(1, "Niski"),
-            new KeyValuePair<int, string>(2, "Średni"),
-            new KeyValuePair<int, string>(3, "Wysoki"),
-            new KeyValuePair<int, string>(4, "Bardzo wysoki"),
-            new KeyValuePair<int, string>(5, "Krytyczny")
-        };
+            {
+                new KeyValuePair<int, string>(1, "Niski"),
+                new KeyValuePair<int, string>(2, "Średni"),
+                new KeyValuePair<int, string>(3, "Wysoki"),
+                new KeyValuePair<int, string>(4, "Bardzo wysoki"),
+                new KeyValuePair<int, string>(5, "Krytyczny")
+            };
             SelectedPriority = PriorityList.FirstOrDefault();
 
             Employees = new ObservableCollection<EmployeeModel>();
 
-           
+            _tasksView = CollectionViewSource.GetDefaultView(Tasks); // widok task listy
+            SortByTimeCommand = new Command(SortByTime);
+            SortByEmployeeCommand = new Command(SortByEmployee);
+            SortByPriorityCommand = new Command(SortByPriority);
+            ClearSortingCommand = new Command(ClearSorting);
 
         }
 
         public ObservableCollection<EmployeeModel> Employees { get; set; }
-        public ObservableCollection<TaskModel> Tasks { get; set; } // Przechowywanie zadań
+        public ObservableCollection<TaskModel> Tasks { get; set; }
         public List<KeyValuePair<int, string>> PriorityList { get; }
         public Command AddTaskCommand { get; private set; }
         public Command LetAnHourPassCommand { get; private set; }
         public Command AutomaticTimeLapseCommand { get; private set; }
+        public Command SortByTimeCommand { get; private set; }
+        public Command SortByEmployeeCommand { get; private set; }
+        public Command SortByPriorityCommand { get; private set; }
+        public Command ClearSortingCommand { get; private set; }  
+
 
 
         public string NewTaskDescription { get => newTaskDescription; set => Set(ref newTaskDescription, value); }
@@ -85,6 +97,7 @@ namespace WpfApp.ViewModel
             NewTaskDescription = string.Empty;
             NumericTimeValue = 1;
             SelectedPriority = PriorityList.FirstOrDefault();
+            _tasksView.Refresh();
 
         }
 
@@ -177,8 +190,31 @@ namespace WpfApp.ViewModel
                         }
                     }
                     OnPropertyChanged(nameof(Tasks));
+                    _tasksView.Refresh();
                 }
             }
         }
+        private void SortByTime()
+        {
+            _tasksView.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Descending));
+            _tasksView.Refresh();
+        }
+        private void SortByEmployee()
+        {
+            _tasksView.SortDescriptions.Add(new SortDescription("EmployeeID", ListSortDirection.Ascending));
+            _tasksView.Refresh();
+
+        }
+        private void SortByPriority()
+        {
+            _tasksView.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
+            _tasksView.Refresh();
+        }
+        private void ClearSorting()
+        {
+            _tasksView.SortDescriptions.Clear();
+            _tasksView.Refresh();
+        }
+
     }
 }
