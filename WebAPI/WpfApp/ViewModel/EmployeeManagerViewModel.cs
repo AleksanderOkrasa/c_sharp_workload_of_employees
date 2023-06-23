@@ -16,12 +16,6 @@ namespace WpfApp.ViewModel
         private string? lastName;
         private WorkloadViewModel workloadViewModel;
 
-      //  public EmployeeManagerViewModel()
-     //   {
-    //        AddEmployeeCommand = new Command(AddEmployee);
-    //        workload = new WorkloadViewModel();
-     //       Employees = workload.Employees;
-        //}
         public EmployeeManagerViewModel(WorkloadViewModel workloadViewModel)
         {
             this.workloadViewModel = workloadViewModel;
@@ -47,7 +41,6 @@ namespace WpfApp.ViewModel
             };
 
             Employees.Add(newEmployee);
-            //workloadViewModel.Employees.Add(newEmployee);
             FirstName = string.Empty;
             LastName = string.Empty;
 

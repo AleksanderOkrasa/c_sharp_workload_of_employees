@@ -25,6 +25,5 @@ namespace WpfApp.Basic
             OnPropertyChanged(propertyName);
             return true;
         }
-       // public virtual bool Update
     }
 }

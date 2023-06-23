@@ -102,10 +102,10 @@
                 <Button Content="Filter by Employee" Command="{Binding FilterByEmployeeCommand}" />
             </StackPanel>
 
-            <Button Grid.Row="6 Content="Sort by Time" Command="{Binding SortByTimeCommand}"/>
+            <Button Grid.Row="6" Content="Sort by Time" Command="{Binding SortByTimeCommand}"/>
             <Button Grid.Row="7" Content="Sort by Employee ID" Command="{Binding SortByEmployeeCommand}"/>
             <Button Grid.Row="8" Content="Sort by Priority" Command="{Binding SortByPriorityCommand}"/>
-            <Button Grid.Row="9"  Content="Clear sorting and filters" Command="{Binding ClearSortingAndFiltersCommand}"/>
+            <Button Grid.Row="9" Content="Clear sorting and filters" Command="{Binding ClearSortingAndFiltersCommand}"/>
             
         </Grid>
     </Grid>
