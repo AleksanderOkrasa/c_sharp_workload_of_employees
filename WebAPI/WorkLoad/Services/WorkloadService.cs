@@ -94,5 +94,79 @@ namespace WorkLoad.Services
             }
         }
         #endregion Employee
+        #region Tasks
+
+        public async Task<List<TaskModel>> GetTasksAsync()
+        {
+            try
+            {
+                return await _db.Tasks.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<TaskModel> GetTaskAsync(int id)
+        {
+            try
+            {
+                return await _db.Tasks.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<TaskModel> AddTaskAsync(TaskModel task)
+        {
+            try
+            {
+                await _db.Tasks.AddAsync(task);
+                await _db.SaveChangesAsync();
+                return await _db.Tasks.FindAsync(task.Id);
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+        }
+        public async Task<TaskModel> UpdateTaskAsync(TaskModel task)
+        {
+            try
+            {
+                _db.Entry(task).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+
+                return task;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<(bool, string)> DeleteTaskAsync(TaskModel task)
+        {
+            try
+            {
+                var dbTask = await _db.Tasks.FindAsync(task.Id);
+
+                if (dbTask != null) 
+                {
+                    return (false, "Taks could not be found");
+                }
+
+                _db.Remove(task);
+                await _db.SaveChangesAsync();
+
+                return (true, "Task got deleted");
+            }
+            catch(Exception ex)
+            {
+               return (false, $"An error occured. Error Message: {ex.Message}");
+            }
+        }
+        #endregion Tasks
     }
 }
