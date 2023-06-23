@@ -128,14 +128,16 @@ namespace WpfApp.ViewModel
         }
 
 
-        private void DecreaseResidualTime(List<int> ListTaskID, double time)
+        private void DecreaseResidualTime(List<int> ListTaskID, double timeToReduce)
         {
             foreach (var taskID in ListTaskID)
             {
                 var taskToUpdate = Tasks.FirstOrDefault(task => task.ID == taskID);
                 if (taskToUpdate != null)
                 {
-                    taskToUpdate.Time -= time;
+
+                    taskToUpdate.Time -= timeToReduce;
+                    OnPropertyChanged(nameof(Tasks));
                 }
             }
         }

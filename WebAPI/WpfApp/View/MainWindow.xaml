@@ -59,7 +59,7 @@
 
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Tasks}">
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TasksList" ItemsSource="{Binding Tasks}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
