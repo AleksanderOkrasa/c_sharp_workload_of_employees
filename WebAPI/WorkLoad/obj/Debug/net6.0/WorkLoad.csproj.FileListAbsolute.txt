@@ -148,3 +148,16 @@ C:\Users\oleko\Source\Repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WorkLoa
 C:\Users\oleko\Source\Repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WorkLoad\obj\Debug\net6.0\WorkLoad.pdb
 C:\Users\oleko\Source\Repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WorkLoad\obj\Debug\net6.0\WorkLoad.genruntimeconfig.cache
 C:\Users\oleko\Source\Repos\c_sharp_workload_of_employees_wsz_edu\WebAPI\WorkLoad\obj\Debug\net6.0\ref\WorkLoad.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\obj\Debug\net6.0\WorkLoad.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\x86\e_sqlite3.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\x64\e_sqlite3.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\SQLite-net.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\SQLiteNetExtensions.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\SQLitePCLRaw.batteries_green.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\runtimes\win7-x64\native\e_sqlite3.dll
+C:\Users\pkownacki\Source\Repos\c_sharp_workload_of_employees\WebAPI\WorkLoad\bin\Debug\net6.0\runtimes\win7-x86\native\e_sqlite3.dll
