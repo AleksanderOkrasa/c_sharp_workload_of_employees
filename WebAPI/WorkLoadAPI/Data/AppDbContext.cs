@@ -14,7 +14,7 @@ namespace WorkLoadAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-         
+           
 
             modelBuilder.Entity<Employee>(e =>
             {
