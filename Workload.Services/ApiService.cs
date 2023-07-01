@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text;
 using Workload.Models;
-
+using System.Collections.ObjectModel;
 
 namespace Workload.Services
 {
@@ -28,6 +28,16 @@ namespace Workload.Services
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             await _client.PostAsync("/api/duties", content);
+        }
+
+        public async Task<ObservableCollection<DutyModel>> GetDuties()
+        {
+            var response = await _client.GetAsync("/api/duties");
+            var content = await response.Content.ReadAsStringAsync();
+
+            var collection = JsonSerializer.Deserialize<ObservableCollection<DutyModel>>(content, _options);
+
+            return collection;
         }
 
         public async Task PostEmployee(EmployeeModel employee)

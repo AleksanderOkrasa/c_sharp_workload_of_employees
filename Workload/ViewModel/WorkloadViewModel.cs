@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +22,20 @@ namespace Workload.ViewModel
 
         public override async Task AddDutyToDB(DutyModel duty)
         {
-            Duties.Add(duty);
             await _apiService.PostDuty(duty);
+            var DutiesFromApi = await _apiService.GetDuties();
+            UpdateDutiesCollection(DutiesFromApi);
+        }
+        
+        private void UpdateDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
+        {
+            foreach (DutyModel dutyFromApi in DutiesFromApi)
+            {
+                if (!Duties.Any(duty => duty.Id == dutyFromApi.Id))
+                {
+                    Duties.Add(dutyFromApi);
+                }
+            }
         }
 
         public override int GenerateNewDutyID()
