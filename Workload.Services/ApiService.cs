@@ -29,5 +29,14 @@ namespace Workload.Services
 
             await _client.PostAsync("/api/duties", content);
         }
+
+        public async Task PostEmployee(EmployeeModel employee)
+        {
+            var json = JsonSerializer.Serialize(employee, _options);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            await _client.PostAsync("/api/employees", content);
+        }
     }
 }

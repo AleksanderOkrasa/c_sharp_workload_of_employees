@@ -52,7 +52,7 @@ namespace WpfApp.ViewModel
             Employees.Add(employee);
         }
 
-        private int GenerateNewEmployeeID()
+        public virtual int GenerateNewEmployeeID()
         {
             if (Employees.Count > 0)
                 return Employees[Employees.Count - 1].Id + 1;

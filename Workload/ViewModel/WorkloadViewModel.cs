@@ -16,12 +16,17 @@ namespace Workload.ViewModel
         {
             _apiService = new ApiService("http://127.0.0.1:5052");
         }
+
+
         public override async Task AddDutyToDB(DutyModel duty)
         {
-            Duties.Add(duty);
             Duties.Add(duty);
             await _apiService.PostDuty(duty);
         }
 
+        public override int GenerateNewDutyID()
+        {
+            return 0; // Pozostawiam inkrementowanie WebApi
+        }
     }
 }

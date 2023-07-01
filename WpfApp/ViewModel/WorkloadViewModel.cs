@@ -112,7 +112,7 @@ namespace WpfApp.ViewModel
             Duties.Add(duty);
         }
 
-        private int GenerateNewDutyID()
+        public virtual int GenerateNewDutyID()
         {
             if (Duties.Count > 0)
                 return Duties[Duties.Count - 1].Id + 1;
