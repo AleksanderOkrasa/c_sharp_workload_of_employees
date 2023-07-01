@@ -47,7 +47,7 @@ namespace WpfApp.ViewModel
 
         }
 
-        private async Task AddEmployeeToDB(EmployeeModel employee)
+        public virtual async Task AddEmployeeToDB(EmployeeModel employee)
         {
             Employees.Add(employee);
         }

@@ -107,7 +107,7 @@ namespace WpfApp.ViewModel
 
         }
          
-        private async Task AddDutyToDB(DutyModel duty)
+        public virtual async Task AddDutyToDB(DutyModel duty)
         {
             Duties.Add(duty);
         }
