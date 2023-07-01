@@ -1,0 +1,22 @@
+
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+
+# Ignorowanie projektów WebApi
+*.csproj
+*.csproj.user
+*.sln
+bin/
+obj/
+
+# Ignorowanie bazy danych SQLite
+*.db
+*.db3
+*.sqlite
+*.sqlite3
+
+

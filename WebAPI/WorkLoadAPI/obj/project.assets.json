@@ -6348,19 +6348,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pan Paweł\\.nuget\\packages\\": {}
+    "C:\\Users\\oleko\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\source\\repos\\WebAPI\\WorkLoadAPI\\WorkLoadAPI.csproj",
+      "projectUniqueName": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoadAPI\\WorkLoadAPI.csproj",
       "projectName": "WorkLoadAPI",
-      "projectPath": "F:\\source\\repos\\WebAPI\\WorkLoadAPI\\WorkLoadAPI.csproj",
-      "packagesPath": "C:\\Users\\Pan Paweł\\.nuget\\packages\\",
-      "outputPath": "F:\\source\\repos\\WebAPI\\WorkLoadAPI\\obj\\",
+      "projectPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoadAPI\\WorkLoadAPI.csproj",
+      "packagesPath": "C:\\Users\\oleko\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WebAPI\\WorkLoadAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Pan Paweł\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\oleko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
