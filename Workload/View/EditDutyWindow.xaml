@@ -4,12 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Workload.View"
+        xmlns:viewmodel="clr-namespace:Workload.ViewModel"
+        xmlns:basic="clr-namespace:Workload.Basic"
+        xmlns:views="clr-namespace:Workload.View"
         mc:Ignorable="d"
         Title="EditDutyWindow" Height="450" Width="800">
-    <Window.Resources>
-        <CollectionViewSource x:Key="EditDutyModelView" Source="{Binding Tasks}" />
-    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Duty Description"/>
+        <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding EditedDutyDescription}" />
+
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="Priority"/>
+        <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding EditedPriority}"
+                  DisplayMemberPath="Value"
+                  SelectedValuePath="Key"
+                  ItemsSource="{Binding PriorityList}" />
+
+        <TextBlock Grid.Column="2" Grid.Row="0"  Text="Time [Hours]"/>
+        <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding EditedTimeValue}" />
+
+        <TextBlock Grid.Column="3" Grid.Row="0"  Text="Employee"/>
+        <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding EditedEmployeeID}"
+                  DisplayMemberPath="FullName"
+                  SelectedValuePath="Id"
+                  ItemsSource="{Binding Employees}" />
+
+
+        <Button Grid.Column="4" Grid.Row="1" Content="Edit Duty" Command="{Binding EditDutyCommand}" />
     </Grid>
 </Window>
