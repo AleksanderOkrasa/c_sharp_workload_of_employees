@@ -20,6 +20,7 @@ namespace Workload.ViewModel
         {
             Duties.Add(duty);
             Duties.Add(duty);
+            await _apiService.PostDuty(duty);
         }
 
     }

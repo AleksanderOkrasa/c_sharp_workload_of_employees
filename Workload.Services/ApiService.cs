@@ -21,5 +21,13 @@ namespace Workload.Services
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
         }
+        public async Task PostDuty(DutyModel duty)
+        {
+            var json = JsonSerializer.Serialize(duty, _options);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            await _client.PostAsync("/api/duties", content);
+        }
     }
 }
