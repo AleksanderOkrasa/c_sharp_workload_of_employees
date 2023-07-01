@@ -50,7 +50,7 @@ namespace Workload
             var button = (Button)sender;
             var duty = (DutyModel)button.CommandParameter;
 
-            editDutyViewModel = new EditDutyViewModel(duty);
+            editDutyViewModel = new EditDutyViewModel(workloadViewModel, duty);
             editDutyWindow = new EditDutyWindow(editDutyViewModel);
 
             editDutyWindow.Show();
