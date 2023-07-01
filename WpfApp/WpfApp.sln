@@ -5,6 +5,10 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp.csproj", "{5314A406-FCA4-4612-A720-9AA3B7810A23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workload.Services", "..\Workload.Services\Workload.Services.csproj", "{51EA83CE-83C6-4E03-AB47-BC64090A015A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workload", "..\Workload\Workload.csproj", "{F747AA62-C7E2-46CD-9258-BA63686AD32A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{5314A406-FCA4-4612-A720-9AA3B7810A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5314A406-FCA4-4612-A720-9AA3B7810A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5314A406-FCA4-4612-A720-9AA3B7810A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EA83CE-83C6-4E03-AB47-BC64090A015A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EA83CE-83C6-4E03-AB47-BC64090A015A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EA83CE-83C6-4E03-AB47-BC64090A015A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EA83CE-83C6-4E03-AB47-BC64090A015A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F747AA62-C7E2-46CD-9258-BA63686AD32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F747AA62-C7E2-46CD-9258-BA63686AD32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F747AA62-C7E2-46CD-9258-BA63686AD32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F747AA62-C7E2-46CD-9258-BA63686AD32A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
