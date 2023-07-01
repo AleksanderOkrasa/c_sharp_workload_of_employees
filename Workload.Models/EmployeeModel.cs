@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp.Basic;
 
-namespace WpfApp.Model
+namespace Workload.Models
 {
-    public class EmployeeModel : ViewModelBase
+    public class EmployeeModel 
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

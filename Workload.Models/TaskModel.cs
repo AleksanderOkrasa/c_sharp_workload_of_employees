@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp.Basic;
 
-namespace WpfApp.Model
+namespace Workload.Models
 {
-    public class DutyModel : ViewModelBase
+    public class DutyModel
     {
         private double time;
         public int Id { get; set; }
@@ -18,7 +17,6 @@ namespace WpfApp.Model
             set
             {
                 time = value;
-                OnPropertyChanged();
             }
         }
 

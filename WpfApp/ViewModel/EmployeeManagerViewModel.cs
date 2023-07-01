@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp.Basic;
-using WpfApp.Model;
+using Workload.Models;
 
 
 namespace WpfApp.ViewModel

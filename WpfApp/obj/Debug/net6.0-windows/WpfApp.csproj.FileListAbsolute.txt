@@ -46,3 +46,6 @@ C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\obj\Deb
 C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\obj\Debug\net6.0-windows\WpfApp.pdb
 C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\obj\Debug\net6.0-windows\WpfApp.genruntimeconfig.cache
 C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\obj\Debug\net6.0-windows\ref\WpfApp.dll
+C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\bin\Debug\net6.0-windows\Workload.Models.dll
+C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\bin\Debug\net6.0-windows\Workload.Models.pdb
+C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\obj\Debug\net6.0-windows\WpfApp.csproj.CopyComplete

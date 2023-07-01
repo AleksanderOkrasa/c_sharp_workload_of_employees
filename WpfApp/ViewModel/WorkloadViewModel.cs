@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using WpfApp.Basic;
-using WpfApp.Model;
+using Workload.Models;
 using WpfApp.View;
 
 namespace WpfApp.ViewModel
