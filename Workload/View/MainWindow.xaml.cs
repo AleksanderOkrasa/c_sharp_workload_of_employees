@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Workload.ViewModel;
 using Workload.View;
+using Workload.Models;
 
 namespace Workload
 {
@@ -23,8 +24,12 @@ namespace Workload
     public partial class MainWindow : Window
     {
         private WorkloadViewModel workloadViewModel;
+
         private EmployeeManagerViewModel employeeManagerViewModel;
         private EmployeeManagerWindow employeeManagerWindow;
+
+        private EditDutyViewModel editDutyViewModel;
+        private EditDutyWindow editDutyWindow;
 
         public MainWindow()
         {
@@ -39,5 +44,22 @@ namespace Workload
             employeeManagerWindow = new EmployeeManagerWindow(employeeManagerViewModel);
             employeeManagerWindow.Show();
         }
+
+        private void OpenEditDutyWindow(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var duty = (DutyModel)button.CommandParameter;
+
+            editDutyViewModel = new EditDutyViewModel(duty);
+            editDutyWindow = new EditDutyWindow(editDutyViewModel);
+
+            editDutyWindow.Show();
+
+            // Przekaż zadanie do ViewModelu głównego (SelectedDuty) i otwórz okno edycji
+            // Możesz użyć okna dialogowego lub zmienić widok na inny widok edycji
+            // Przekazanie zadania do okna umożliwi wyświetlenie aktualnych danych zadania w formularzu edycji
+        }
+
+
     }
 }

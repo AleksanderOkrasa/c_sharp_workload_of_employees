@@ -76,7 +76,7 @@
                                     <Button Content="Usuń" Command="{Binding DataContext.DeleteDutyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                     CommandParameter="{Binding}" />
                                     <Button Content="Edytuj" Command="{Binding DataContext.EditDutyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                    CommandParameter="{Binding}" />
+                                    CommandParameter="{Binding}" Click="OpenEditDutyWindow" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
