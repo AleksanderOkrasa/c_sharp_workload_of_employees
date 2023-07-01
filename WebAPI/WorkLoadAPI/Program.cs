@@ -86,7 +86,7 @@ app.MapPut("/api/duties/{id}", async (int id, Duty inputDuty, AppDbContext db) =
 {
     var duty = await db.Duties.FindAsync(id);
 
-    if (duty != null) return Results.NotFound();
+    if (duty == null) return Results.NotFound();
 
     duty.DutyDescription = inputDuty.DutyDescription;
     duty.Time = inputDuty.Time;

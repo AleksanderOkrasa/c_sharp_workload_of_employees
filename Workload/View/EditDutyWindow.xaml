@@ -37,7 +37,7 @@
         <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding EditedTimeValue}" />
 
         <TextBlock Grid.Column="3" Grid.Row="0"  Text="Employee"/>
-        <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding EditedEmployeeID}"
+        <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding EditedEmployeeId}"
                   DisplayMemberPath="FullName"
                   SelectedValuePath="Id"
                   ItemsSource="{Binding Employees}" />

@@ -50,6 +50,12 @@ namespace Workload.ViewModel
 
         }
 
+
+        public async Task UpdateDuty(DutyModel duty)
+        {
+            await _apiService.UpdateDuty(duty);
+        }
+
         private async Task UpdateNewDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
         {
             foreach (DutyModel dutyFromApi in DutiesFromApi)
