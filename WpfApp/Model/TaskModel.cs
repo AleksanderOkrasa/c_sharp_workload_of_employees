@@ -7,11 +7,11 @@ using WpfApp.Basic;
 
 namespace WpfApp.Model
 {
-    public class TaskModel : ViewModelBase
+    public class DutyModel : ViewModelBase
     {
         private double time;
-        public int ID { get; set; }
-        public string TaskDescription { get; set; }
+        public int Id { get; set; }
+        public string DutyDescription { get; set; }
         public int EmployeeId { get; set; }
         public int Priority { get; set; }
         public double Time { get { return time; }

@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <CollectionViewSource x:Key="TasksViewSource" Source="{Binding Tasks}" />
+        <CollectionViewSource x:Key="DutiesViewSource" Source="{Binding Duties}" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -37,8 +37,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Task Description"/>
-                <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding NewTaskDescription}" />
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Duty Description"/>
+                <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding NewDutyDescription}" />
 
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Priority"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding SelectedPriority}"
@@ -52,21 +52,21 @@
                 <TextBlock Grid.Column="3" Grid.Row="0"  Text="Employee"/>
                 <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding SelectedEmployeeID}"
                   DisplayMemberPath="FullName"
-                  SelectedValuePath="ID"
+                  SelectedValuePath="Id"
                   ItemsSource="{Binding Employees}" />
 
 
-                <Button Grid.Column="4" Grid.Row="1" Content="Add Task" Command="{Binding AddTaskCommand}" />
+                <Button Grid.Column="4" Grid.Row="1" Content="Add Duty" Command="{Binding AddDutyCommand}" />
             </Grid>
 
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="TasksList" ItemsSource="{Binding Tasks}">
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="DutiesList" ItemsSource="{Binding Duties}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Task ID" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Duty ID" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding EmployeeId}" />
-                    <GridViewColumn Header="Task Description" DisplayMemberBinding="{Binding TaskDescription}" />
+                    <GridViewColumn Header="Duty Description" DisplayMemberBinding="{Binding DutyDescription}" />
                     <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" />
                     <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
                 </GridView>
@@ -97,7 +97,7 @@
                 <TextBlock Text="Filter by Employee"/>
                 <ComboBox SelectedValue="{Binding FilterEmployeeID}"
                   DisplayMemberPath="FullName"
-                  SelectedValuePath="ID"
+                  SelectedValuePath="Id"
                   ItemsSource="{Binding Employees}" />
                 <Button Content="Filter by Employee" Command="{Binding FilterByEmployeeCommand}" />
             </StackPanel>

@@ -35,7 +35,7 @@ namespace WpfApp.ViewModel
         {
             EmployeeModel newEmployee = new EmployeeModel
             {
-                ID = GenerateNewEmployeeID(),
+                Id = GenerateNewEmployeeID(),
                 FirstName = FirstName,
                 LastName = LastName,
             };
@@ -55,7 +55,7 @@ namespace WpfApp.ViewModel
         private int GenerateNewEmployeeID()
         {
             if (Employees.Count > 0)
-                return Employees[Employees.Count - 1].ID + 1;
+                return Employees[Employees.Count - 1].Id + 1;
             else
                 return 1;
         }

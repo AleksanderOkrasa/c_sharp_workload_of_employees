@@ -20,20 +20,20 @@ namespace WpfApp.ViewModel
     public partial class WorkloadViewModel : ViewModelBase
 
     {
-        private string newTaskDescription;
+        private string newDutyDescription;
         private KeyValuePair<int, string> _selectedPriority;
         private double numericTimeValue = 1;
         private int selectedEmployeeID;
         private bool automaticTimeLapseIsChecked;
-        private ICollectionView _tasksView;
+        private ICollectionView _dutiesView;
         private int filterEmployeeID;
 
 
         public WorkloadViewModel()
         {
-            Tasks = new ObservableCollection<TaskModel>();
+            Duties = new ObservableCollection<DutyModel>();
 
-            AddTaskCommand = new Command(AddTask);
+            AddDutyCommand = new Command(AddDuty);
 
             LetAnHourPassCommand = new Command(LetAnHourPass);
 
@@ -51,7 +51,7 @@ namespace WpfApp.ViewModel
 
             Employees = new ObservableCollection<EmployeeModel>();
 
-            _tasksView = CollectionViewSource.GetDefaultView(Tasks); // widok task listy
+            _dutiesView = CollectionViewSource.GetDefaultView(Duties); 
             SortByTimeCommand = new Command(SortByTime);
             SortByEmployeeCommand = new Command(SortByEmployee);
             SortByPriorityCommand = new Command(SortByPriority);
@@ -61,9 +61,9 @@ namespace WpfApp.ViewModel
         }
 
         public ObservableCollection<EmployeeModel> Employees { get; set; }
-        public ObservableCollection<TaskModel> Tasks { get; set; }
+        public ObservableCollection<DutyModel> Duties { get; set; }
         public List<KeyValuePair<int, string>> PriorityList { get; }
-        public Command AddTaskCommand { get; private set; }
+        public Command AddDutyCommand { get; private set; }
         public Command LetAnHourPassCommand { get; private set; }
         public Command AutomaticTimeLapseCommand { get; private set; }
         public Command SortByTimeCommand { get; private set; }
@@ -74,7 +74,7 @@ namespace WpfApp.ViewModel
 
 
 
-        public string NewTaskDescription { get => newTaskDescription; set => Set(ref newTaskDescription, value); }
+        public string NewDutyDescription { get => newDutyDescription; set => Set(ref newDutyDescription, value); }
 
         public KeyValuePair<int, string> SelectedPriority { get => _selectedPriority; set => Set(ref _selectedPriority, value); }
 
@@ -87,35 +87,35 @@ namespace WpfApp.ViewModel
 
 
 
-        private async void AddTask()
+        private async void AddDuty()
         {
-            TaskModel newTask = new TaskModel
+            DutyModel newDuty = new DutyModel
             {
-                ID = GenerateNewTaskID(),
-                TaskDescription = NewTaskDescription,
+                Id = GenerateNewDutyID(),
+                DutyDescription = NewDutyDescription,
                 Priority = SelectedPriority.Key,
                 Time = NumericTimeValue,
                 EmployeeId = SelectedEmployeeID,
             };
 
-            await AddTaskToDB(newTask);
+            await AddDutyToDB(newDuty);
 
-            NewTaskDescription = string.Empty;
+            NewDutyDescription = string.Empty;
             NumericTimeValue = 1;
             SelectedPriority = PriorityList.FirstOrDefault();
-            _tasksView.Refresh();
+            _dutiesView.Refresh();
 
         }
          
-        private async Task AddTaskToDB(TaskModel task)
+        private async Task AddDutyToDB(DutyModel duty)
         {
-            Tasks.Add(task);
+            Duties.Add(duty);
         }
 
-        private int GenerateNewTaskID()
+        private int GenerateNewDutyID()
         {
-            if (Tasks.Count > 0)
-                return Tasks[Tasks.Count - 1].ID + 1;
+            if (Duties.Count > 0)
+                return Duties[Duties.Count - 1].Id + 1;
             else
                 return 1;
         }
@@ -134,18 +134,18 @@ namespace WpfApp.ViewModel
 
         private void LetAnTimePass(double timeToReduce)
         {
-            List<int> ListTaskIdToTimeChange = new List<int>();
+            List<int> ListDutyIdToTimeChange = new List<int>();
 
             foreach (var employee in Employees)
             {
-                int employeeID = employee.ID;
-                var taskID = LookForTaskWithTheHighestPriorityForEmployee(employeeID);
-                if (taskID != 0)
+                int employeeID = employee.Id;
+                var dutyID = LookForDutyWithTheHighestPriorityForEmployee(employeeID);
+                if (dutyID != 0)
                 {
-                    ListTaskIdToTimeChange.Add(taskID);
+                    ListDutyIdToTimeChange.Add(dutyID);
                 }
             }
-            DecreaseResidualTime(ListTaskIdToTimeChange, timeToReduce);
+            DecreaseResidualTime(ListDutyIdToTimeChange, timeToReduce);
 
         }
 
@@ -154,91 +154,91 @@ namespace WpfApp.ViewModel
             LetAnTimePass(1);
         }
 
-        private int LookForTaskWithTheHighestPriorityForEmployee(int employeeID)
+        private int LookForDutyWithTheHighestPriorityForEmployee(int employeeID)
         {
             for (var i = 5; i >= 1; i--)
             {
-                var taskID = SearchPriorityInTaskForEmployee(employeeID, i);
-                if (taskID != 0) { return taskID; }
+                var dutyID = SearchPriorityInDutyForEmployee(employeeID, i);
+                if (dutyID != 0) { return dutyID; }
             }
             return 0;
         }
 
-        private int SearchPriorityInTaskForEmployee(int employeeID, int priority)
+        private int SearchPriorityInDutyForEmployee(int employeeID, int priority)
         {
-            foreach (var task in Tasks)
+            foreach (var duty in Duties)
             {
-                if (task.EmployeeId == employeeID && task.Priority == priority && task.Time > 0)
+                if (duty.EmployeeId == employeeID && duty.Priority == priority && duty.Time > 0)
                 {
-                    return task.ID;
+                    return duty.Id;
                 }
             }
             return 0;
         }
 
 
-        private void DecreaseResidualTime(List<int> ListTaskID, double timeToReduce)
+        private void DecreaseResidualTime(List<int> ListDutyID, double timeToReduce)
         {
-            foreach (var taskID in ListTaskID)
+            foreach (var dutyID in ListDutyID)
             {
-                var taskToUpdate = Tasks.FirstOrDefault(task => task.ID == taskID);
-                if (taskToUpdate != null)
+                var dutyToUpdate = Duties.FirstOrDefault(duty => duty.Id == dutyID);
+                if (dutyToUpdate != null)
                 {
-                    if (taskToUpdate.Time > timeToReduce)
+                    if (dutyToUpdate.Time > timeToReduce)
                     {
-                        taskToUpdate.Time -= timeToReduce;
+                        dutyToUpdate.Time -= timeToReduce;
                     }
                     else
                     {
-                        timeToReduce -= taskToUpdate.Time;
-                        taskToUpdate.Time = 0;
+                        timeToReduce -= dutyToUpdate.Time;
+                        dutyToUpdate.Time = 0;
 
-                        var employeeID = taskToUpdate.EmployeeId;
-                        var newTaskID = LookForTaskWithTheHighestPriorityForEmployee(employeeID);
-                        if (newTaskID != 0)
+                        var employeeID = dutyToUpdate.EmployeeId;
+                        var newDutyID = LookForDutyWithTheHighestPriorityForEmployee(employeeID);
+                        if (newDutyID != 0)
                         {
-                            ListTaskID.Append(newTaskID); // Tutaj znalazłem różnicę między Add a Append, na Add wyskakuje błąd :)  
+                            ListDutyID.Append(newDutyID); // Tutaj znalazłem różnicę między Add a Append, na Add wyskakuje błąd :)  
                         }
                     }
-                    OnPropertyChanged(nameof(Tasks));
-                    _tasksView.Refresh();
+                    OnPropertyChanged(nameof(Duties));
+                    _dutiesView.Refresh();
                 }
             }
         }
         private void SortByTime()
         {
-            _tasksView.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Descending));
-            _tasksView.Refresh();
+            _dutiesView.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Descending));
+            _dutiesView.Refresh();
         }
         private void SortByEmployee()
         {
-            _tasksView.SortDescriptions.Add(new SortDescription("EmployeeID", ListSortDirection.Ascending));
-            _tasksView.Refresh();
+            _dutiesView.SortDescriptions.Add(new SortDescription("EmployeeID", ListSortDirection.Ascending));
+            _dutiesView.Refresh();
 
         }
         private void SortByPriority()
         {
-            _tasksView.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
-            _tasksView.Refresh();
+            _dutiesView.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
+            _dutiesView.Refresh();
         }
         private void ClearSortingAndFilters()
         {
-            _tasksView.SortDescriptions.Clear();
-            _tasksView.Filter = null;
-            _tasksView.Refresh();
+            _dutiesView.SortDescriptions.Clear();
+            _dutiesView.Filter = null;
+            _dutiesView.Refresh();
         }
 
         private void FilterByEmployee()
         {
-            _tasksView.Filter = task =>
+            _dutiesView.Filter = duty =>
             {
-                if (task is TaskModel taskModel)
+                if (duty is DutyModel dutyModel)
                 {
-                    return taskModel.EmployeeId == FilterEmployeeID;
+                    return dutyModel.EmployeeId == FilterEmployeeID;
                 }
                 return false;
             };
-            _tasksView.Refresh();
+            _dutiesView.Refresh();
         }
     }
 }

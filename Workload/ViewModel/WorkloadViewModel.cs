@@ -9,5 +9,6 @@ namespace Workload.ViewModel
 {
     internal class WorkloadViewModel : WpfApp.ViewModel.WorkloadViewModel
     {
+
     }
 }
