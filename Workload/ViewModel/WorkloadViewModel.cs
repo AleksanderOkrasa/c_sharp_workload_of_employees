@@ -71,6 +71,7 @@ namespace Workload.ViewModel
                     dutiesToRemove.Add(dutyInCollection);
                 }
             }
+
             if (dutiesToRemove.Any())
             {
                 foreach (DutyModel dutyToRemove in dutiesToRemove)

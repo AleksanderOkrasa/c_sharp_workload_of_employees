@@ -57,7 +57,7 @@ namespace Workload.Services
 
 
 
-    public async Task PostEmployee(EmployeeModel employee)
+        public async Task PostEmployee(EmployeeModel employee)
         {
             var json = JsonSerializer.Serialize(employee, _options);
 
@@ -74,6 +74,20 @@ namespace Workload.Services
             var collection = JsonSerializer.Deserialize<ObservableCollection<EmployeeModel>>(content, _options);
 
             return collection;
+        }
+
+        public async Task DeleteEmployee(int employeeId)
+        {
+            await _client.DeleteAsync($"/api/employees/{employeeId}");
+        }
+
+        public async Task UpdateEmployee(EmployeeModel employee)
+        {
+            var json = JsonSerializer.Serialize(employee, _options);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            await _client.PutAsync($"/api/employees/{employee.Id}", content);
         }
     }
 }

@@ -40,6 +40,18 @@
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="First name" DisplayMemberBinding="{Binding FirstName}" />
                     <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn Header="Action">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Usuń" Command="{Binding DataContext.DeleteEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding}" />
+                                    <Button Content="Edytuj" Command="{Binding DataContext.EditEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
