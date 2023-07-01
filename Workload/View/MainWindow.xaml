@@ -69,6 +69,18 @@
                     <GridViewColumn Header="Duty Description" DisplayMemberBinding="{Binding DutyDescription}" />
                     <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" />
                     <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
+                    <GridViewColumn Header="Action">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Usuń" Command="{Binding DataContext.DeleteDutyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding}" />
+                                    <Button Content="Edytuj" Command="{Binding DataContext.EditDutyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -21,6 +21,7 @@ namespace Workload.Services
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
         }
+
         public async Task PostDuty(DutyModel duty)
         {
             var json = JsonSerializer.Serialize(duty, _options);
@@ -40,7 +41,23 @@ namespace Workload.Services
             return collection;
         }
 
-        public async Task PostEmployee(EmployeeModel employee)
+        public async Task DeleteDuty(int dutyId)
+        {
+            await _client.DeleteAsync($"/api/duties/{dutyId}");
+        }
+
+        public async Task UpdateDuty(DutyModel duty)
+        {
+            var json = JsonSerializer.Serialize(duty, _options);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            await _client.PutAsync($"/api/duties/{duty.Id}", content);
+        }
+
+
+
+    public async Task PostEmployee(EmployeeModel employee)
         {
             var json = JsonSerializer.Serialize(employee, _options);
 
@@ -48,6 +65,7 @@ namespace Workload.Services
 
             await _client.PostAsync("/api/employees", content);
         }
+
         public async Task<ObservableCollection<EmployeeModel>> GetEmployees()
         {
             var response = await _client.GetAsync("/api/employees");
