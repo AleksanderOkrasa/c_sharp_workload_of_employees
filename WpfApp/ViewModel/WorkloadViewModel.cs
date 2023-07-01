@@ -87,7 +87,7 @@ namespace WpfApp.ViewModel
 
 
 
-        private void AddTask()
+        private async void AddTask()
         {
             TaskModel newTask = new TaskModel
             {
@@ -98,13 +98,18 @@ namespace WpfApp.ViewModel
                 EmployeeId = SelectedEmployeeID,
             };
 
-            Tasks.Add(newTask);
+            await AddTaskToDB(newTask);
 
             NewTaskDescription = string.Empty;
             NumericTimeValue = 1;
             SelectedPriority = PriorityList.FirstOrDefault();
             _tasksView.Refresh();
 
+        }
+         
+        private async Task AddTaskToDB(TaskModel task)
+        {
+            Tasks.Add(task);
         }
 
         private int GenerateNewTaskID()

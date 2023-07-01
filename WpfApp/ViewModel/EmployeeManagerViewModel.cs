@@ -31,7 +31,7 @@ namespace WpfApp.ViewModel
         
 
 
-        private void AddEmployee()
+        private async void AddEmployee()
         {
             EmployeeModel newEmployee = new EmployeeModel
             {
@@ -40,10 +40,16 @@ namespace WpfApp.ViewModel
                 LastName = LastName,
             };
 
-            Employees.Add(newEmployee);
+            await AddEmployeeToDB(newEmployee);
+
             FirstName = string.Empty;
             LastName = string.Empty;
 
+        }
+
+        private async Task AddEmployeeToDB(EmployeeModel employee)
+        {
+            Employees.Add(employee);
         }
 
         private int GenerateNewEmployeeID()
