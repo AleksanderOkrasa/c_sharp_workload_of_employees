@@ -48,5 +48,14 @@ namespace Workload.Services
 
             await _client.PostAsync("/api/employees", content);
         }
+        public async Task<ObservableCollection<EmployeeModel>> GetEmployees()
+        {
+            var response = await _client.GetAsync("/api/employees");
+            var content = await response.Content.ReadAsStringAsync();
+
+            var collection = JsonSerializer.Deserialize<ObservableCollection<EmployeeModel>>(content, _options);
+
+            return collection;
+        }
     }
 }
