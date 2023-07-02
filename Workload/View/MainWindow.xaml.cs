@@ -54,7 +54,6 @@ namespace Workload.View
 
             editDutyViewModel = new EditDutyViewModel(workloadViewModel, duty);
             editDutyWindow = new EditDutyWindow(editDutyViewModel);
-
             editDutyWindow.Show();
         }
 

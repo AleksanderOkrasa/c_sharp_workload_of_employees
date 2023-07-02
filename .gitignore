@@ -20,3 +20,7 @@ obj/
 *.sqlite3
 
 
+WebAPI/WorkLoadAPI/workload.db-wal
+WebAPI/WorkLoadAPI/workload.db-shm
+WebAPI/WorkLoadAPI/workload.db
+WebAPI/WorkLoadAPI/.vs/WorkLoadAPI/DesignTimeBuild/.dtbcache.v2
