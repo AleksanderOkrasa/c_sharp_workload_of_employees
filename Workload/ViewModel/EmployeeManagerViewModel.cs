@@ -21,7 +21,7 @@ namespace Workload.ViewModel
             this._workloadViewModel = workloadViewModel;
             _apiService = new ApiService("http://127.0.0.1:5052");
             DeleteEmployeeCommand = new RelayCommand<EmployeeModel>(DeleteEmployee);
-            EditEmployeeCommand = new RelayCommand<EmployeeModel>(EditEmployee);
+            AccelerateEmployeeCommand = new RelayCommand<EmployeeModel>(AccelerateEmployee);
         }
 
         public override async Task AddEmployeeToDB(EmployeeModel employee)
@@ -31,7 +31,7 @@ namespace Workload.ViewModel
             await UpdateNewEmployeesCollection(employeesFromApi);
         }
         public ICommand DeleteEmployeeCommand { get; private set; }
-        public ICommand EditEmployeeCommand { get; private set; }
+        public ICommand AccelerateEmployeeCommand { get; private set; }
 
 
         public override int GenerateNewEmployeeID()
@@ -45,12 +45,12 @@ namespace Workload.ViewModel
             var EmployeesFromApi = await _apiService.GetEmployees();
 
             await UpdateRemovedEmployeesCollection(EmployeesFromApi);
-            _workloadViewModel.EditDutiesWithEmployeeId(employee.Id, "delete_employee");
+            await _workloadViewModel.EditDutiesWithEmployeeId(employee.Id, "delete_employee");
         }
 
-        private void EditEmployee(EmployeeModel employee)
+        private async void AccelerateEmployee(EmployeeModel employee)
         {
-
+            await _workloadViewModel.EditDutiesWithEmployeeId(employee.Id, "accelerate");
         }
 
 

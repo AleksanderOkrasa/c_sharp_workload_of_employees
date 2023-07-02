@@ -46,7 +46,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Usuń" Command="{Binding DataContext.DeleteEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                     CommandParameter="{Binding}" />
-                                    <Button Content="Edytuj" Command="{Binding DataContext.EditEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    <Button Content="Pośpiesz" Command="{Binding DataContext.AccelerateEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                     CommandParameter="{Binding}" />
                                 </StackPanel>
                             </DataTemplate>

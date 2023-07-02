@@ -78,9 +78,26 @@ namespace Workload.ViewModel
                     {
                         duty.EmployeeId = 0;
                     }
+                    if (action == "accelerate")
+                    {
+                        duty.Time = duty.Time * 0.9;
+                    }
                     await UpdateDuty(duty);
                 }
             }  
+        }
+        
+        public double ReturnTotalTimeRequiredForEmployee(int employeeId)
+        {
+            double total = 0;
+            foreach (DutyModel duty in Duties)
+            {
+                if (duty.EmployeeId == employeeId)
+                {
+                    total += duty.Time;
+                }
+            }
+            return total;
         }
 
 
