@@ -10,6 +10,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,28 +35,38 @@
                 <ColumnDefinition Width="Auto" MinWidth="80"/>
             </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Duty Description"/>
-                <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding NewDutyDescription}" />
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" >
+                <TextBlock  Text="Duty Description"  />
+            </Border>
+            <TextBox Grid.Column="0" Grid.Row="1" TextWrapping ="Wrap" Text="{Binding NewDutyDescription}" />
 
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Priority"/>
-                <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding SelectedPriority}"
+            <Border Grid.Column="1" Grid.Row="0" >
+                <TextBlock  Text="Priority"  />
+            </Border>
+            <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding SelectedPriority}"
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
-                  ItemsSource="{Binding PriorityList}" />
+                  ItemsSource="{Binding PriorityList}"/>
 
-                <TextBlock Grid.Column="2" Grid.Row="0"  Text="Time [Hours]"/>
-                <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding NumericTimeValue}" />
+            <Border Grid.Column="2" Grid.Row="0" >
+                <TextBlock   Text="Time"  />
+            </Border>
+            <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding NumericTimeValue}" Style="{StaticResource TextBox}"/>
 
-                <TextBlock Grid.Column="3" Grid.Row="0"  Text="Employee"/>
-                <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding SelectedEmployeeID}"
+            <Border Grid.Column="3" Grid.Row="0" >
+                <TextBlock   Text="Employee"  />
+            </Border>
+            
+            <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding SelectedEmployeeID}"
                   DisplayMemberPath="FullName"
                   SelectedValuePath="Id"
                   ItemsSource="{Binding Employees}" />
 
+                  ItemsSource="{Binding Employees}"/>
 
                 <Button Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Content="Add Duty" Command="{Binding AddDutyCommand}" />
         </Grid>
@@ -101,7 +117,9 @@
             <TextBlock Grid.Row ="3" Text=""/>
 
             <StackPanel Grid.Row="4" Grid.RowSpan="2" Orientation="Vertical">
-                <TextBlock Text="Filter by Employee"/>
+                <Border >
+                    <TextBlock Text="Select Employee"  Background="LightGray"/>
+                </Border>
                 <ComboBox SelectedValue="{Binding FilterEmployeeID}"
                   DisplayMemberPath="FullName"
                   SelectedValuePath="Id"
