@@ -1,0 +1,157 @@
+﻿<Window x:Class="Workload.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Workload.View" 
+        xmlns:viewmodel="clr-namespace:Workload.ViewModel"
+        xmlns:basic="clr-namespace:Workload.Basic"
+        xmlns:views="clr-namespace:Workload.View"
+        mc:Ignorable="d"
+        Title="Workload App" Height="600" Width="900" MinHeight="450" MinWidth="700">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FFCCE5FF" Offset="0" />
+            <GradientStop Color="#FF0066CC" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Margin="10, 3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*" MaxWidth="160"/>
+                <ColumnDefinition Width="0.8*" MaxWidth="100"/>
+                <ColumnDefinition Width="2*" MaxWidth="230"/>
+                <ColumnDefinition Width="Auto" MinWidth="80"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" >
+                <TextBlock  Text="Duty Description"  />
+            </Border>
+            <TextBox Grid.Column="0" Grid.Row="1" TextWrapping ="Wrap" Text="{Binding NewDutyDescription}" />
+
+            <Border Grid.Column="1" Grid.Row="0" >
+                <TextBlock  Text="Priority"  />
+            </Border>
+            <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding SelectedPriority}"
+                  DisplayMemberPath="Value"
+                  SelectedValuePath="Key"
+                  ItemsSource="{Binding PriorityList}"/>
+
+            <Border Grid.Column="2" Grid.Row="0" >
+                <TextBlock   Text="Time"  />
+            </Border>
+            <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding NumericTimeValue}" Style="{StaticResource TextBox}"/>
+
+            <Border Grid.Column="3" Grid.Row="0" >
+                <TextBlock   Text="Employee"  />
+            </Border>
+            
+            <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding SelectedEmployeeID}"
+                  DisplayMemberPath="FullName"
+                  SelectedValuePath="Id"
+                  ItemsSource="{Binding Employees}"/>
+
+                <Button Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Content="Add Duty" Command="{Binding AddDutyCommand}" />
+        </Grid>
+        
+        
+
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="DutiesList" ItemsSource="{Binding Duties}">
+            <ListView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="LightSkyBlue" Offset="1" />
+                    <GradientStop Color="#FF003D7F" Offset="0.6" />
+                    <GradientStop Color="#FF0066CC" Offset="0" />
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Duty ID" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Duty Description" DisplayMemberBinding="{Binding DutyDescription}" />
+                    <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" />
+                    <GridViewColumn Header="EmployeeId" DisplayMemberBinding="{Binding EmployeeId}"/>
+                    <GridViewColumn Header="Action">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Button Content="Usuń" Command="{Binding DataContext.DeleteDutyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding}" Style="{StaticResource DeleteButton}"/>
+                                    <Button Content="Edytuj" Command="{Binding DataContext.EditDutyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding}" Click="OpenEditDutyWindow" Style="{StaticResource ActionButtons}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Column="5" Grid.Row="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="1.3*"/>
+
+
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Content="Employee Manager" Click="OpenEmployeeManagerWindow" Style="{StaticResource EmployeeManagerButton}"/>
+            
+            <Button Grid.Row="1" Content="Let An Hour Pass" Command="{Binding LetAnHourPassCommand}" Style="{StaticResource MenuButtons}"/>
+            <ToggleButton Grid.Row="2" Content="Automatic Time Lapse" IsChecked="{Binding AutomaticTimeLapseIsChecked}" Command="{Binding AutomaticTimeLapseCommand}" Style="{StaticResource ToggleButtons}"/>
+
+            <StackPanel Grid.Row="4" Grid.RowSpan="2" Orientation="Vertical">
+                <Border >
+                    <TextBlock Text="Select Employee"  Background="LightGray"/>
+                </Border>
+                <ComboBox SelectedValue="{Binding FilterEmployeeID}"
+                  DisplayMemberPath="FullName"
+                  SelectedValuePath="Id"
+                  ItemsSource="{Binding Employees}"/>
+                <Button Content="Filter by Employee" Command="{Binding FilterByEmployeeCommand}" Style="{StaticResource SortButtons}" Background="LightGray"/>
+            </StackPanel>
+
+            <Button Grid.Row="6" Content="Sort by Time" Command="{Binding SortByTimeCommand}" Style="{StaticResource SortButtons}"/>
+            <Button Grid.Row="7" Content="Sort by Employee ID" Command="{Binding SortByEmployeeCommand}" Style="{StaticResource SortButtons}"/>
+            <Button Grid.Row="8" Content="Sort by Priority" Command="{Binding SortByPriorityCommand}" Style="{StaticResource SortButtons}"/>
+            <Button Grid.Row="9" Content="Clear sorting and filters" Command="{Binding ClearSortingAndFiltersCommand}" Style="{StaticResource ClearSortingButton}"/>
+
+        </Grid>
+    </Grid>
+</Window>
