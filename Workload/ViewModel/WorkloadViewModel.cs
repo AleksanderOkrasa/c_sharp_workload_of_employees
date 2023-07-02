@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Workload.View;
 using Workload.Models;
 using Workload.Services;
 using WpfApp.Basic;
@@ -25,6 +26,7 @@ namespace Workload.ViewModel
         }
         public ICommand DeleteDutyCommand { get; private set; }
         public DutyModel EditedDuty { get => editedDuty; set => Set(ref editedDuty, value); }
+
 
         public override async Task AddDutyToDB(DutyModel duty)
         {

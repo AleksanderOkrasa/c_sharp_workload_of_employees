@@ -237,6 +237,7 @@ namespace WpfApp.ViewModel
         {
             _dutiesView.SortDescriptions.Clear();
             _dutiesView.Filter = null;
+            FilterEmployeeID = 0;
             SortByDutyId();
         }
 

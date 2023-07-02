@@ -8,20 +8,19 @@
         xmlns:basic="clr-namespace:Workload.Basic"
         xmlns:views="clr-namespace:Workload.View"
         mc:Ignorable="d"
-        Title="EditDutyWindow" Height="450" Width="800">
+        Title="EditDutyWindow" Height="100" Width="800" MinHeight="100" MinWidth="450">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="3*" MinWidth="100"/>
+            <ColumnDefinition Width="*" MinWidth="80"/>
+            <ColumnDefinition Width="1.5*" MinWidth="40"/>
+            <ColumnDefinition Width="2*" MinWidth="140"/>
+            <ColumnDefinition Width="*" MinWidth="65"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Duty Description"/>

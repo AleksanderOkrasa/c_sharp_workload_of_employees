@@ -16,7 +16,7 @@ using Workload.ViewModel;
 using Workload.View;
 using Workload.Models;
 
-namespace Workload
+namespace Workload.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -37,6 +37,7 @@ namespace Workload
             workloadViewModel = new WorkloadViewModel();
             employeeManagerViewModel = new EmployeeManagerViewModel(workloadViewModel);
             employeeManagerViewModel.LoadEmployeeDataFromApi();
+            workloadViewModel.Employees = employeeManagerViewModel.Employees;
             DataContext = workloadViewModel;
         }
 
