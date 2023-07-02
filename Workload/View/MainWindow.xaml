@@ -79,6 +79,20 @@
         
 
         <ListView Grid.Row="1" Grid.Column="0" x:Name="DutiesList" ItemsSource="{Binding Duties}">
+            <ListView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="LightSkyBlue" Offset="1" />
+                    <GradientStop Color="#FF003D7F" Offset="0.6" />
+                    <GradientStop Color="#FF0066CC" Offset="0" />
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+
+            </ListView.Resources>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Duty ID" DisplayMemberBinding="{Binding Id}" />
