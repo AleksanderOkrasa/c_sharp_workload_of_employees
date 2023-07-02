@@ -25,6 +25,7 @@ namespace Workload.ViewModel
         public EditDutyViewModel(WorkloadViewModel workloadViewModel, DutyModel selectedDuty)
         {
             this.workloadViewModel = workloadViewModel;
+            this.selectedDuty = selectedDuty;
             Employees = workloadViewModel.Employees;
             EditDutyCommand = new Command(EditDuty);
 
@@ -39,7 +40,7 @@ namespace Workload.ViewModel
         public string EditedDutyDescription { get => editedDutyDescription; set => Set(ref editedDutyDescription, value); }
         public KeyValuePair<int, string> EditedPriority { get => editedPriority; set => Set(ref editedPriority, value); }
         public double EditedTimeValue { get => editedTimeValue; set => Set(ref editedTimeValue, value); }
-        public int EditedEmployeeID { get => editedEmployeeId; set => Set(ref editedEmployeeId, value); }
+        public int EditedEmployeeId { get => editedEmployeeId; set => Set(ref editedEmployeeId, value); }
 
 
         public DutyModel SelectedDuty { get => selectedDuty; set => Set(ref selectedDuty, value); }
@@ -55,9 +56,9 @@ namespace Workload.ViewModel
                 DutyDescription = EditedDutyDescription,
                 Priority = EditedPriority.Key,
                 Time = EditedTimeValue,
-                EmployeeId = EditedEmployeeID,
+                EmployeeId = EditedEmployeeId,
             };
-            await UpdateDuty(editedDuty);
+            await workloadViewModel.UpdateDuty(editedDuty);
         }
     }
 

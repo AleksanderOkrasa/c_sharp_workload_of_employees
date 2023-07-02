@@ -54,10 +54,6 @@ namespace Workload
             editDutyWindow = new EditDutyWindow(editDutyViewModel);
 
             editDutyWindow.Show();
-
-            // Przekaż zadanie do ViewModelu głównego (SelectedDuty) i otwórz okno edycji
-            // Możesz użyć okna dialogowego lub zmienić widok na inny widok edycji
-            // Przekazanie zadania do okna umożliwi wyświetlenie aktualnych danych zadania w formularzu edycji
         }
 
 

@@ -55,6 +55,7 @@ namespace WpfApp.ViewModel
             SortByTimeCommand = new Command(SortByTime);
             SortByEmployeeCommand = new Command(SortByEmployee);
             SortByPriorityCommand = new Command(SortByPriority);
+            SortByDutyIdCommand = new Command(SortByDutyId);
             ClearSortingAndFiltersCommand = new Command(ClearSortingAndFilters);
             FilterByEmployeeCommand = new Command(FilterByEmployee);
 
@@ -69,6 +70,7 @@ namespace WpfApp.ViewModel
         public Command SortByTimeCommand { get; private set; }
         public Command SortByEmployeeCommand { get; private set; }
         public Command SortByPriorityCommand { get; private set; }
+        public Command SortByDutyIdCommand { get; set; }
         public Command ClearSortingAndFiltersCommand { get; private set; }
         public Command FilterByEmployeeCommand { get; private set; }   
 
@@ -221,11 +223,21 @@ namespace WpfApp.ViewModel
             _dutiesView.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
             _dutiesView.Refresh();
         }
+        private void SortByDutyId()
+        {
+            _dutiesView.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
+            _dutiesView.Refresh();
+        }
+        public void RefreshSorting()
+        {
+            _dutiesView.Refresh();
+        }
+
         private void ClearSortingAndFilters()
         {
             _dutiesView.SortDescriptions.Clear();
             _dutiesView.Filter = null;
-            _dutiesView.Refresh();
+            SortByDutyId();
         }
 
         private void FilterByEmployee()

@@ -30,6 +30,11 @@ namespace Workload.View
             editDutyViewModel = viewModel;
             DataContext = editDutyViewModel;
         }
+
+        private void CloseEditDutyWindow(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 
 }

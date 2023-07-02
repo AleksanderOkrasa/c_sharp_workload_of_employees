@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ namespace Workload.ViewModel
     internal class WorkloadViewModel : WpfApp.ViewModel.WorkloadViewModel
     {
         private ApiService _apiService;
+        private DutyModel editedDuty;
         public WorkloadViewModel() : base()
         {
             _apiService = new ApiService("http://127.0.0.1:5052");
@@ -22,14 +24,15 @@ namespace Workload.ViewModel
             EditDutyCommand = new RelayCommand<DutyModel>(EditDuty);
         }
         public ICommand DeleteDutyCommand { get; private set; }
-        public ICommand EditDutyCommand {  get; private set; }
+        public ICommand EditDutyCommand { get; private set; }
+        public DutyModel EditedDuty { get => editedDuty; set => Set(ref editedDuty, value); }
 
         public override async Task AddDutyToDB(DutyModel duty)
         {
             await _apiService.PostDuty(duty);
 
-            var DutiesFromApi = await _apiService.GetDuties();
-            await UpdateNewDutiesCollection(DutiesFromApi);
+            var dutiesFromApi = await _apiService.GetDuties();
+            await UpdateNewDutiesCollection(dutiesFromApi);
         }
 
         public override int GenerateNewDutyID()
@@ -40,20 +43,30 @@ namespace Workload.ViewModel
         private async void DeleteDuty(DutyModel duty)
         {
             await _apiService.DeleteDuty(duty.Id);
-            var DutiesFromApi = await _apiService.GetDuties();
+            var dutiesFromApi = await _apiService.GetDuties();
 
-            await UpdateRemovedDutiesCollection(DutiesFromApi);
+            await UpdateRemovedDutiesCollection(dutiesFromApi);
         }
 
         private void EditDuty(DutyModel duty)
         {
-
+            EditedDuty = duty;
         }
 
 
-        public async Task UpdateDuty(DutyModel duty)
+        public async Task UpdateDuty(DutyModel dutyToUpdate)
         {
-            await _apiService.UpdateDuty(duty);
+            await _apiService.UpdateDuty(dutyToUpdate);
+            var oldDuty = Duties.FirstOrDefault(item => item.Id == dutyToUpdate.Id);
+            if (oldDuty != null) 
+            {
+                oldDuty.DutyDescription = dutyToUpdate.DutyDescription;
+                oldDuty.Priority = dutyToUpdate.Priority;
+                oldDuty.Time = dutyToUpdate.Time;
+                oldDuty.EmployeeId = dutyToUpdate.EmployeeId;
+                RefreshDutiesViews();
+            }
+
         }
 
         private async Task UpdateNewDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
@@ -83,6 +96,26 @@ namespace Workload.ViewModel
                 foreach (DutyModel dutyToRemove in dutiesToRemove)
                 {
                     Duties.Remove(dutyToRemove);
+                }
+            }
+        }
+
+        private void UpdateEditedDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
+        {
+            foreach (var dutyInCollection in Duties)
+            {
+                if (dutyInCollection != null)
+                {
+                    var dutyFromApi = DutiesFromApi.SingleOrDefault(item => item.Id == dutyInCollection.Id);
+                    Console.WriteLine(dutyInCollection.Id);
+                    if (dutyFromApi != null)
+                    {
+                        Console.WriteLine(dutyFromApi.Id);
+                        dutyInCollection.DutyDescription = dutyFromApi.DutyDescription;
+                        dutyInCollection.Priority = dutyFromApi.Priority;
+                        dutyInCollection.Time = dutyFromApi.Time;
+                        dutyInCollection.EmployeeId = dutyFromApi.EmployeeId;
+                    }
                 }
             }
         }

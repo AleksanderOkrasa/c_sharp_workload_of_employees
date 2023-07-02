@@ -43,6 +43,6 @@
                   ItemsSource="{Binding Employees}" />
 
 
-        <Button Grid.Column="4" Grid.Row="1" Content="Edit Duty" Command="{Binding EditDutyCommand}" />
+        <Button Grid.Column="4" Grid.Row="1" Content="Edit Duty" Command="{Binding EditDutyCommand}" Click="CloseEditDutyWindow" />
     </Grid>
 </Window>
