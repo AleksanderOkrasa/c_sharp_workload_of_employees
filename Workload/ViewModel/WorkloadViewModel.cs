@@ -68,6 +68,21 @@ namespace Workload.ViewModel
             }
 
         }
+        public async Task EditDutiesWithEmployeeId(int employeeId, string action)
+        {
+            foreach(DutyModel duty in Duties)
+            {
+                if (duty.EmployeeId == employeeId)
+                {
+                    if (action == "delete_employee")
+                    {
+                        duty.EmployeeId = 0;
+                    }
+                    await UpdateDuty(duty);
+                }
+            }  
+        }
+
 
         private async Task UpdateNewDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
         {
@@ -140,7 +155,7 @@ namespace Workload.ViewModel
                         var newDutyID = LookForDutyWithTheHighestPriorityForEmployee(employeeID);
                         if (newDutyID != 0)
                         {
-                            ListDutyID.Append(newDutyID); // Tutaj znalazłem różnicę między Add a Append, na Add wyskakuje błąd :)  
+                            ListDutyID.Append(newDutyID); // Tutaj znaazłem różnicę między Add a Append, na Add wyskakuje błąd :)  
                         }
                     }
                     OnPropertyChanged(nameof(Duties));

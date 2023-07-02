@@ -14,9 +14,11 @@ namespace Workload.ViewModel
     internal class EmployeeManagerViewModel : WpfApp.ViewModel.EmployeeManagerViewModel
     {
         private ApiService _apiService;
+        private WorkloadViewModel _workloadViewModel;
 
-        public EmployeeManagerViewModel(WpfApp.ViewModel.WorkloadViewModel workloadViewModel) : base(workloadViewModel)
+        public EmployeeManagerViewModel(WorkloadViewModel workloadViewModel) : base(workloadViewModel)
         {
+            this._workloadViewModel = workloadViewModel;
             _apiService = new ApiService("http://127.0.0.1:5052");
             DeleteEmployeeCommand = new RelayCommand<EmployeeModel>(DeleteEmployee);
             EditEmployeeCommand = new RelayCommand<EmployeeModel>(EditEmployee);
@@ -43,6 +45,7 @@ namespace Workload.ViewModel
             var EmployeesFromApi = await _apiService.GetEmployees();
 
             await UpdateRemovedEmployeesCollection(EmployeesFromApi);
+            _workloadViewModel.EditDutiesWithEmployeeId(employee.Id, "delete_employee");
         }
 
         private void EditEmployee(EmployeeModel employee)
