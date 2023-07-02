@@ -22,26 +22,34 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
+            <Border Grid.Column="0" Grid.Row="0" >
+                <TextBlock TextAlignment="Center" Text="Duty Description"/>
+            </Border>
+        <TextBox TextWrapping ="Wrap" Grid.Column="0" Grid.Row="1" Text="{Binding EditedDutyDescription}"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Duty Description"/>
-        <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding EditedDutyDescription}" />
-
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="Priority"/>
+        <Border Grid.Column="1" Grid.Row="0" >
+            <TextBlock Text="Priority"/>
+        </Border>
         <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding EditedPriority}"
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
-                  ItemsSource="{Binding PriorityList}" />
+                  ItemsSource="{Binding PriorityList}"/>
 
-        <TextBlock Grid.Column="2" Grid.Row="0"  Text="Time [Hours]"/>
-        <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding EditedTimeValue}" />
+        <Border Grid.Column="2" Grid.Row="0" >
+            <TextBlock Text="Time [Hours]"/>
+        </Border>
+        <basic:NumericTextBox Grid.Column="2" Grid.Row="1" Text="{Binding EditedTimeValue}" Style="{DynamicResource TextBox}"/>
 
-        <TextBlock Grid.Column="3" Grid.Row="0"  Text="Employee"/>
+        <Border Grid.Column="3" Grid.Row="0" >
+            <TextBlock Text="Employee"/>
+        </Border>
         <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding EditedEmployeeId}"
                   DisplayMemberPath="FullName"
                   SelectedValuePath="Id"
-                  ItemsSource="{Binding Employees}" />
+                  ItemsSource="{Binding Employees}"  />
 
 
-        <Button Grid.Column="4" Grid.Row="1" Content="Edit Duty" Command="{Binding EditDutyCommand}" Click="CloseEditDutyWindow" />
+        <Button Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Content="Edit Duty" Command="{Binding EditDutyCommand}" Click="CloseEditDutyWindow"/>
     </Grid>
 </Window>
