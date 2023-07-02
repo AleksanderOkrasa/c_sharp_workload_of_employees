@@ -21,10 +21,9 @@ namespace Workload.ViewModel
         {
             _apiService = new ApiService("http://127.0.0.1:5052");
             DeleteDutyCommand = new RelayCommand<DutyModel>(DeleteDuty);
-            EditDutyCommand = new RelayCommand<DutyModel>(EditDuty);
+            LoadDataFromApi();
         }
         public ICommand DeleteDutyCommand { get; private set; }
-        public ICommand EditDutyCommand { get; private set; }
         public DutyModel EditedDuty { get => editedDuty; set => Set(ref editedDuty, value); }
 
         public override async Task AddDutyToDB(DutyModel duty)
@@ -46,11 +45,6 @@ namespace Workload.ViewModel
             var dutiesFromApi = await _apiService.GetDuties();
 
             await UpdateRemovedDutiesCollection(dutiesFromApi);
-        }
-
-        private void EditDuty(DutyModel duty)
-        {
-            EditedDuty = duty;
         }
 
 
@@ -100,6 +94,11 @@ namespace Workload.ViewModel
             return total;
         }
 
+        private async Task LoadDataFromApi()
+        {
+            var dutiesFromApi = await _apiService.GetDuties();
+            await UpdateNewDutiesCollection(dutiesFromApi);
+        }
 
         private async Task UpdateNewDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
         {
@@ -111,6 +110,7 @@ namespace Workload.ViewModel
                 }
             }
         }
+
         private async Task UpdateRemovedDutiesCollection(ObservableCollection<DutyModel> DutiesFromApi)
         {
             List<DutyModel> dutiesToRemove = new List<DutyModel>();

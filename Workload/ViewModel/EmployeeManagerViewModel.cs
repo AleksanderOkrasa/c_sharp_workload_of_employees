@@ -22,7 +22,10 @@ namespace Workload.ViewModel
             _apiService = new ApiService("http://127.0.0.1:5052");
             DeleteEmployeeCommand = new RelayCommand<EmployeeModel>(DeleteEmployee);
             AccelerateEmployeeCommand = new RelayCommand<EmployeeModel>(AccelerateEmployee);
+
         }
+        public ICommand DeleteEmployeeCommand { get; private set; }
+        public ICommand AccelerateEmployeeCommand { get; private set; }
 
         public override async Task AddEmployeeToDB(EmployeeModel employee)
         {
@@ -30,9 +33,6 @@ namespace Workload.ViewModel
             var employeesFromApi = await _apiService.GetEmployees();
             await UpdateNewEmployeesCollection(employeesFromApi);
         }
-        public ICommand DeleteEmployeeCommand { get; private set; }
-        public ICommand AccelerateEmployeeCommand { get; private set; }
-
 
         public override int GenerateNewEmployeeID()
         {
@@ -53,6 +53,12 @@ namespace Workload.ViewModel
             await _workloadViewModel.EditDutiesWithEmployeeId(employee.Id, "accelerate");
         }
 
+
+        public async Task LoadEmployeeDataFromApi()
+        {
+            var employeesFromApi = await _apiService.GetEmployees();
+            await UpdateNewEmployeesCollection(employeesFromApi);
+        }
 
         private async Task UpdateNewEmployeesCollection(ObservableCollection<EmployeeModel> EmployeesFromApi)
         {

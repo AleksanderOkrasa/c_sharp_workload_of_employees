@@ -36,6 +36,7 @@ namespace Workload
             InitializeComponent();
             workloadViewModel = new WorkloadViewModel();
             employeeManagerViewModel = new EmployeeManagerViewModel(workloadViewModel);
+            employeeManagerViewModel.LoadEmployeeDataFromApi();
             DataContext = workloadViewModel;
         }
 
