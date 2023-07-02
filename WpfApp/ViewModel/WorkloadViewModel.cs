@@ -156,7 +156,7 @@ namespace WpfApp.ViewModel
             LetAnTimePass(1);
         }
 
-        private int LookForDutyWithTheHighestPriorityForEmployee(int employeeID)
+        public int LookForDutyWithTheHighestPriorityForEmployee(int employeeID)
         {
             for (var i = 5; i >= 1; i--)
             {
@@ -179,7 +179,7 @@ namespace WpfApp.ViewModel
         }
 
 
-        private void DecreaseResidualTime(List<int> ListDutyID, double timeToReduce)
+        public virtual void DecreaseResidualTime(List<int> ListDutyID, double timeToReduce)
         {
             foreach (var dutyID in ListDutyID)
             {
@@ -228,7 +228,7 @@ namespace WpfApp.ViewModel
             _dutiesView.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
             _dutiesView.Refresh();
         }
-        public void RefreshSorting()
+        public void RefreshDutiesViews()
         {
             _dutiesView.Refresh();
         }

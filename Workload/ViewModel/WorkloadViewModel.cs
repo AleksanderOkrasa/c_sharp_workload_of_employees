@@ -119,5 +119,35 @@ namespace Workload.ViewModel
                 }
             }
         }
+
+        public override void DecreaseResidualTime(List<int> ListDutyID, double timeToReduce)
+        {
+            foreach (var dutyID in ListDutyID)
+            {
+                var dutyToUpdate = Duties.FirstOrDefault(duty => duty.Id == dutyID);
+                if (dutyToUpdate != null)
+                {
+                    if (dutyToUpdate.Time > timeToReduce)
+                    {
+                        dutyToUpdate.Time -= timeToReduce;
+                    }
+                    else
+                    {
+                        timeToReduce -= dutyToUpdate.Time;
+                        dutyToUpdate.Time = 0;
+
+                        var employeeID = dutyToUpdate.EmployeeId;
+                        var newDutyID = LookForDutyWithTheHighestPriorityForEmployee(employeeID);
+                        if (newDutyID != 0)
+                        {
+                            ListDutyID.Append(newDutyID); // Tutaj znalazłem różnicę między Add a Append, na Add wyskakuje błąd :)  
+                        }
+                    }
+                    OnPropertyChanged(nameof(Duties));
+                    RefreshDutiesViews();
+                    _apiService.UpdateDuty(dutyToUpdate);
+                }
+            }
+        }
     }
 }
