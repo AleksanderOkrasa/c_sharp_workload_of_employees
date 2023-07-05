@@ -59,7 +59,7 @@ namespace Workload.ViewModel
             SortByDutyIdCommand = new Command(SortByDutyId);
             ClearSortingAndFiltersCommand = new Command(ClearSortingAndFilters);
             FilterByEmployeeCommand = new Command(FilterByEmployee);
-            LoadDataFromApi();
+            _ = LoadDataFromApi();
         }
 
         private void ClearSortingAndFilters()

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Workload.View" 
         xmlns:viewmodel="clr-namespace:Workload.ViewModel"
         xmlns:basic="clr-namespace:Workload.Basic"
-        xmlns:views="clr-namespace:Workload.View"
+        xmlns:views="clr-namespace:Workload.View" xmlns:workload="clr-namespace:Workload"
         mc:Ignorable="d"
         Title="Workload App" Height="600" Width="900" MinHeight="450" MinWidth="700">
     <Window.Resources>
@@ -15,7 +15,6 @@
                 <ResourceDictionary Source="./Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </Window.Resources>
 
     <Window.Background>
@@ -91,7 +90,7 @@
                     <Setter Property="Foreground" Value="White" />
                     <Setter Property="FontSize" Value="13"/>
                 </Style>
-
+                <workload:EmployeeConverter x:Key="EmployeeConverter"/>
             </ListView.Resources>
             <ListView.View>
                 <GridView>
@@ -99,7 +98,14 @@
                     <GridViewColumn Header="Duty Description" DisplayMemberBinding="{Binding DutyDescription}" />
                     <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
                     <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" />
-                    <GridViewColumn Header="EmployeeId" DisplayMemberBinding="{Binding EmployeeId}"/>
+                    <GridViewColumn Header="Employee">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding Converter="{StaticResource EmployeeConverter}">
+                                <Binding Path="EmployeeId"/>
+                                <Binding Path="DataContext.Employees" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
                     <GridViewColumn Header="Action">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

@@ -49,14 +49,14 @@ namespace Workload.View
 
         private void OpenEditDutyWindow(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var duty = (DutyModel)button.CommandParameter;
+            //var button = (Button)sender;
+            if (sender is not Button button) return;
+            //var duty = (DutyModel)button.CommandParameter;
+            if (button.CommandParameter is not DutyModel duty) return;
 
             editDutyViewModel = new EditDutyViewModel(workloadViewModel, duty);
             editDutyWindow = new EditDutyWindow(editDutyViewModel);
             editDutyWindow.Show();
         }
-
-
     }
 }
