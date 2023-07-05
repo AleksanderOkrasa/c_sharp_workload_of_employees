@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WpfApp\\WpfApp.csproj": {}
+    "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\WpfApp\\WpfApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\Workload.Models\\Workload.Models.csproj": {
+    "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\Workload.Models\\Workload.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\Workload.Models\\Workload.Models.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\Workload.Models\\Workload.Models.csproj",
         "projectName": "Workload.Models",
-        "projectPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\Workload.Models\\Workload.Models.csproj",
-        "packagesPath": "C:\\Users\\oleko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\Workload.Models\\obj\\",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\Workload.Models\\Workload.Models.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\Workload.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\oleko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +27,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,24 +62,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400-preview.23274.1\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WpfApp\\WpfApp.csproj": {
+    "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\WpfApp\\WpfApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WpfApp\\WpfApp.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\WpfApp\\WpfApp.csproj",
         "projectName": "WpfApp",
-        "projectPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WpfApp\\WpfApp.csproj",
-        "packagesPath": "C:\\Users\\oleko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\WpfApp\\obj\\",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\WpfApp\\WpfApp.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\WpfApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\oleko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -85,14 +89,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\Workload.Models\\Workload.Models.csproj": {
-                "projectPath": "C:\\Users\\oleko\\source\\repos\\c_sharp_workload_of_employees_wsz_edu\\Workload.Models\\Workload.Models.csproj"
+              "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\Workload.Models\\Workload.Models.csproj": {
+                "projectPath": "C:\\Users\\HP\\source\\repos\\c_sharp_workload_of_employees\\Workload.Models\\Workload.Models.csproj"
               }
             }
           }
@@ -125,7 +131,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400-preview.23274.1\\RuntimeIdentifierGraph.json"
         }
       }
     }

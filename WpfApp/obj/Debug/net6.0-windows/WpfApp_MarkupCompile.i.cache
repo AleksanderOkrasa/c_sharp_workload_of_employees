@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\obj\Debug\net6.0-windows\
+C:\Users\HP\source\repos\c_sharp_workload_of_employees\WpfApp\obj\Debug\net6.0-windows\
 WpfApp
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\oleko\source\repos\c_sharp_workload_of_employees_wsz_edu\WpfApp\App.xaml
+C:\Users\HP\source\repos\c_sharp_workload_of_employees\WpfApp\App.xaml
 2-2117810677
 
 12-1416842575
-195-2047326311
+195-557138510
 View\EmployeeManagerWindow.xaml;View\MainWindow.xaml;
 
-True
+False
 

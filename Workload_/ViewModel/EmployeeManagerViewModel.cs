@@ -7,60 +7,34 @@ using Workload.Services;
 using Workload.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Workload.Basic;
+using WpfApp.Basic;
 
 namespace Workload.ViewModel
 {
-    internal class EmployeeManagerViewModel : ViewModelBase
+    internal class EmployeeManagerViewModel : WpfApp.ViewModel.EmployeeManagerViewModel
     {
         private ApiService _apiService;
         private WorkloadViewModel _workloadViewModel;
-        public ObservableCollection<EmployeeModel> Employees { get; set; }
-        private string firstName;
-        private string lastName;
 
-        public Command AddEmployeeCommand { get; }
-
-        public EmployeeManagerViewModel(WorkloadViewModel workloadViewModel)
+        public EmployeeManagerViewModel(WorkloadViewModel workloadViewModel) : base(workloadViewModel)
         {
-            _workloadViewModel = workloadViewModel;
+            this._workloadViewModel = workloadViewModel;
             _apiService = new ApiService("http://127.0.0.1:5052");
             DeleteEmployeeCommand = new RelayCommand<EmployeeModel>(DeleteEmployee);
             AccelerateEmployeeCommand = new RelayCommand<EmployeeModel>(AccelerateEmployee);
-            AddEmployeeCommand = new Command(AddEmployee);
-            Employees = workloadViewModel.Employees;
-        }
-
-        public string FirstName { get => firstName; set => Set(ref firstName, value); }
-        public string LastName { get => lastName; set => Set(ref lastName, value); }
-
-        private async void AddEmployee()
-        {
-            EmployeeModel newEmployee = new EmployeeModel
-            {
-                Id = GenerateNewEmployeeID(),
-                FirstName = FirstName,
-                LastName = LastName,
-            };
-
-            await AddEmployeeToDB(newEmployee);
-
-            FirstName = string.Empty;
-            LastName = string.Empty;
 
         }
-
         public ICommand DeleteEmployeeCommand { get; private set; }
         public ICommand AccelerateEmployeeCommand { get; private set; }
 
-        public async Task AddEmployeeToDB(EmployeeModel employee)
+        public override async Task AddEmployeeToDB(EmployeeModel employee)
         {
             await _apiService.PostEmployee(employee);
             var employeesFromApi = await _apiService.GetEmployees();
             await UpdateNewEmployeesCollection(employeesFromApi);
         }
 
-        public int GenerateNewEmployeeID()
+        public override int GenerateNewEmployeeID()
         {
             return 0; // Pozostawiam inkrementowanie WebApi
         }

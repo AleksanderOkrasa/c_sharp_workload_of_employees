@@ -11,25 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Workload.Models;
 using Workload.ViewModel;
 
 namespace Workload.View
 {
     /// <summary>
-    /// Logika interakcji dla klasy EditDutyWindow.xaml
+    /// Logika interakcji dla klasy EmployeeManagerWindow.xaml
     /// </summary>
-    public partial class EditDutyWindow : Window
+    public partial class EmployeeManagerWindow : Window
     {
-        private EditDutyViewModel editDutyViewModel;
-        internal EditDutyWindow(EditDutyViewModel viewModel)
+        private EmployeeManagerViewModel employeeManagerViewModel;
+
+        internal EmployeeManagerWindow(EmployeeManagerViewModel viewModel)
         {
             InitializeComponent();
-            editDutyViewModel = viewModel;
-            DataContext = editDutyViewModel;
+            employeeManagerViewModel = viewModel;
+            DataContext = employeeManagerViewModel;
             LoadStyles();
         }
-
         private void LoadStyles()
         {
             ResourceDictionary styles = new ResourceDictionary();
@@ -37,10 +36,5 @@ namespace Workload.View
 
             this.Resources.MergedDictionaries.Add(styles);
         }
-        private void CloseEditDutyWindow(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
     }
-
 }

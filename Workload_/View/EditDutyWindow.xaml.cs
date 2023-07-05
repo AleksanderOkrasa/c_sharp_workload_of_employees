@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Workload.Models;
 using Workload.ViewModel;
+using WpfApp.ViewModel;
 
 namespace Workload.View
 {

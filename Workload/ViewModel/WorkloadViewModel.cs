@@ -10,25 +10,158 @@ using System.Windows.Input;
 using Workload.View;
 using Workload.Models;
 using Workload.Services;
-using WpfApp.Basic;
+using Workload.Basic;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Workload.ViewModel
 {
-    internal class WorkloadViewModel : WpfApp.ViewModel.WorkloadViewModel
+    internal class WorkloadViewModel : ViewModelBase
     {
         private ApiService _apiService;
         private DutyModel editedDuty;
-        public WorkloadViewModel() : base()
+        private ICollectionView _dutiesView;
+        private bool automaticTimeLapseIsChecked;
+        private KeyValuePair<int, string> _selectedPriority;
+        private int filterEmployeeID;
+        private string newDutyDescription;
+        private double numericTimeValue;
+        private int selectedEmployeeID;
+
+        public WorkloadViewModel()
         {
             _apiService = new ApiService("http://127.0.0.1:5052");
             DeleteDutyCommand = new RelayCommand<DutyModel>(DeleteDuty);
+            Duties = new ObservableCollection<DutyModel>();
+
+            AddDutyCommand = new Command(AddDuty);
+
+            LetAnHourPassCommand = new Command(LetAnHourPass);
+
+            AutomaticTimeLapseCommand = new Command(AutomaticTimeLapse);
+
+            PriorityList = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(1, "Niski"),
+                new KeyValuePair<int, string>(2, "Średni"),
+                new KeyValuePair<int, string>(3, "Wysoki"),
+                new KeyValuePair<int, string>(4, "Bardzo wysoki"),
+                new KeyValuePair<int, string>(5, "Krytyczny")
+            };
+            SelectedPriority = PriorityList.FirstOrDefault();
+
+            Employees = new ObservableCollection<EmployeeModel>();
+
+            _dutiesView = CollectionViewSource.GetDefaultView(Duties);
+            SortByTimeCommand = new Command(SortByTime);
+            SortByEmployeeCommand = new Command(SortByEmployee);
+            SortByPriorityCommand = new Command(SortByPriority);
+            SortByDutyIdCommand = new Command(SortByDutyId);
+            ClearSortingAndFiltersCommand = new Command(ClearSortingAndFilters);
+            FilterByEmployeeCommand = new Command(FilterByEmployee);
             LoadDataFromApi();
         }
+
+        private void ClearSortingAndFilters()
+        {
+            _dutiesView.SortDescriptions.Clear();
+            _dutiesView.Filter = null;
+            FilterEmployeeID = 0;
+            SortByDutyId();
+        }
+
+        private void FilterByEmployee()
+        {
+            _dutiesView.Filter = duty =>
+            {
+                if (duty is DutyModel dutyModel)
+                {
+                    return dutyModel.EmployeeId == FilterEmployeeID;
+                }
+                return false;
+            };
+            _dutiesView.Refresh();
+        }
+
+        private void SortByTime()
+        {
+            _dutiesView.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Descending));
+            _dutiesView.Refresh();
+        }
+        private void SortByEmployee()
+        {
+            _dutiesView.SortDescriptions.Add(new SortDescription("EmployeeID", ListSortDirection.Ascending));
+            _dutiesView.Refresh();
+
+        }
+        private void SortByPriority()
+        {
+            _dutiesView.SortDescriptions.Add(new SortDescription("Priority", ListSortDirection.Descending));
+            _dutiesView.Refresh();
+        }
+        private void SortByDutyId()
+        {
+            _dutiesView.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
+            _dutiesView.Refresh();
+        }
+
+        private async void AutomaticTimeLapse()
+        {
+            while (AutomaticTimeLapseIsChecked)
+            {
+                LetAnTimePass(0.02);
+                await Task.Delay(100);
+            }
+
+        }
+        private void LetAnTimePass(double timeToReduce)
+        {
+            List<int> ListDutyIdToTimeChange = new List<int>();
+
+            foreach (var employee in Employees)
+            {
+                int employeeID = employee.Id;
+                var dutyID = LookForDutyWithTheHighestPriorityForEmployee(employeeID);
+                if (dutyID != 0)
+                {
+                    ListDutyIdToTimeChange.Add(dutyID);
+                }
+            }
+            DecreaseResidualTime(ListDutyIdToTimeChange, timeToReduce);
+
+        }
+
+        private void LetAnHourPass()
+        {
+            LetAnTimePass(1);
+        }
+
+        private async void AddDuty()
+        {
+            DutyModel newDuty = new DutyModel
+            {
+                Id = GenerateNewDutyID(),
+                DutyDescription = NewDutyDescription,
+                Priority = SelectedPriority.Key,
+                Time = NumericTimeValue,
+                EmployeeId = SelectedEmployeeID,
+            };
+
+            await AddDutyToDB(newDuty);
+
+            NewDutyDescription = string.Empty;
+            NumericTimeValue = 1;
+            SelectedPriority = PriorityList.FirstOrDefault();
+            _dutiesView.Refresh();
+
+        }
+
+
         public ICommand DeleteDutyCommand { get; private set; }
         public DutyModel EditedDuty { get => editedDuty; set => Set(ref editedDuty, value); }
 
 
-        public override async Task AddDutyToDB(DutyModel duty)
+        public async Task AddDutyToDB(DutyModel duty)
         {
             await _apiService.PostDuty(duty);
 
@@ -36,7 +169,7 @@ namespace Workload.ViewModel
             await UpdateNewDutiesCollection(dutiesFromApi);
         }
 
-        public override int GenerateNewDutyID()
+        public int GenerateNewDutyID()
         {
             return 0; // Pozostawiam inkrementowanie WebApi
         }
@@ -54,7 +187,7 @@ namespace Workload.ViewModel
         {
             await _apiService.UpdateDuty(dutyToUpdate);
             var oldDuty = Duties.FirstOrDefault(item => item.Id == dutyToUpdate.Id);
-            if (oldDuty != null) 
+            if (oldDuty != null)
             {
                 oldDuty.DutyDescription = dutyToUpdate.DutyDescription;
                 oldDuty.Priority = dutyToUpdate.Priority;
@@ -66,7 +199,7 @@ namespace Workload.ViewModel
         }
         public async Task EditDutiesWithEmployeeId(int employeeId, string action)
         {
-            foreach(DutyModel duty in Duties)
+            foreach (DutyModel duty in Duties)
             {
                 if (duty.EmployeeId == employeeId)
                 {
@@ -80,9 +213,9 @@ namespace Workload.ViewModel
                     }
                     await UpdateDuty(duty);
                 }
-            }  
+            }
         }
-        
+
         public double ReturnTotalTimeRequiredForEmployee(int employeeId)
         {
             double total = 0;
@@ -154,7 +287,7 @@ namespace Workload.ViewModel
             }
         }
 
-        public override void DecreaseResidualTime(List<int> ListDutyID, double timeToReduce)
+        public void DecreaseResidualTime(List<int> ListDutyID, double timeToReduce)
         {
             foreach (var dutyID in ListDutyID)
             {
@@ -183,5 +316,52 @@ namespace Workload.ViewModel
                 }
             }
         }
+
+        public int LookForDutyWithTheHighestPriorityForEmployee(int employeeID)
+        {
+            for (var i = 5; i >= 1; i--)
+            {
+                var dutyID = SearchPriorityInDutyForEmployee(employeeID, i);
+                if (dutyID != 0) { return dutyID; }
+            }
+            return 0;
+        }
+
+        private int SearchPriorityInDutyForEmployee(int employeeID, int priority)
+        {
+            foreach (var duty in Duties)
+            {
+                if (duty.EmployeeId == employeeID && duty.Priority == priority && duty.Time > 0)
+                {
+                    return duty.Id;
+                }
+            }
+            return 0;
+        }
+
+        public void RefreshDutiesViews()
+        {
+            _dutiesView.Refresh();
+        }
+
+        public ObservableCollection<EmployeeModel> Employees { get; set; }
+        public ObservableCollection<DutyModel> Duties { get; set; }
+        public List<KeyValuePair<int, string>> PriorityList { get; }
+        public Command AddDutyCommand { get; private set; }
+        public Command LetAnHourPassCommand { get; private set; }
+        public Command AutomaticTimeLapseCommand { get; private set; }
+        public Command SortByTimeCommand { get; private set; }
+        public Command SortByEmployeeCommand { get; private set; }
+        public Command SortByPriorityCommand { get; private set; }
+        public Command SortByDutyIdCommand { get; set; }
+        public Command ClearSortingAndFiltersCommand { get; private set; }
+        public Command FilterByEmployeeCommand { get; private set; }
+        public bool AutomaticTimeLapseIsChecked { get => automaticTimeLapseIsChecked; set => Set(ref automaticTimeLapseIsChecked, value); }
+        public KeyValuePair<int, string> SelectedPriority { get => _selectedPriority; set => Set(ref _selectedPriority, value); }
+        public int FilterEmployeeID { get => filterEmployeeID; set => Set(ref filterEmployeeID, value); }
+        public string NewDutyDescription { get => newDutyDescription; set => Set(ref newDutyDescription, value); }
+        public double NumericTimeValue { get => numericTimeValue; set => Set(ref numericTimeValue, value); }
+        public int SelectedEmployeeID { get => selectedEmployeeID; set => Set(ref selectedEmployeeID, value); }
     }
 }
+

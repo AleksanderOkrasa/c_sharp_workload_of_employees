@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Workload.Models;
-using Workload.Basic;
+using WpfApp.Basic;
 
 namespace Workload.ViewModel
 {
